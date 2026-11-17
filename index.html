@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>前沿日报 · 2026-11-17</title>
+<style>
+:root{
+  --blue:#1f6feb; --blue2:#e8f1fe;
+  --green:#0f7b52; --green2:#e6f5ef;
+  --orange:#f08c00; --orange2:#fff4e5;
+  --red:#d9363e; --red2:#fdecec;
+  --ink:#1f2937; --mute:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --bg:#f8fafc;
+  --mono:ui-monospace,Consolas,"Microsoft YaHei",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.7 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:inherit;text-decoration:none}
+header{background:#fff;border-bottom:1px solid var(--line);padding:26px max(20px,4vw) 20px}
+.wrap{max-width:1180px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700}
+h1{font-size:30px;margin:6px 0 2px;font-weight:700;letter-spacing:-.015em}
+.date{color:var(--mute);font-size:14px}
+.brief{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.brief div{padding:12px 16px;border-radius:10px;font-size:14.5px;line-height:1.65}
+.brief .ai{background:var(--blue2);border-left:4px solid var(--blue);color:#134a9e}
+.brief .med{background:var(--green2);border-left:4px solid var(--green);color:#0b5c3d}
+.brief b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;opacity:.85}
+.meta-bar{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--faint)}
+main{max-width:1180px;margin:auto;padding:24px 20px 40px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.cols>section{min-width:0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;
+  margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.sec-head h2{font-size:17px;margin:0;font-weight:700}
+.sec-head span{font-size:12px;color:var(--faint);font-family:var(--mono)}
+.item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin:10px 0;
+  transition:border-color .15s}
+.item:hover{border-color:#d5dbe4}
+.hd{display:flex;gap:9px;align-items:baseline}
+.idx{font-family:var(--mono);font-size:12px;color:#c7cdd6;font-weight:700;flex:none}
+.title{font-size:15.5px;font-weight:650;line-height:1.45;overflow-wrap:anywhere}
+.title a:hover{color:var(--blue)}
+.src{font-size:11px;padding:1px 7px;border-radius:4px;font-weight:700;letter-spacing:.03em;flex:none}
+.src.STAT{background:var(--orange2);color:#b35c00}
+.src.NEJM{background:var(--blue2);color:#134a9e}
+.src.Lancet{background:var(--red2);color:var(--red)}
+.src.JAMA{background:#f2eefc;color:#6542b8}
+.src.NatMed,.src.NatBiotech{background:var(--green2);color:var(--green)}
+.sum{margin:7px 0 0;font-size:14px;color:#374151;line-height:1.65;overflow-wrap:anywhere}
+.why{margin:8px 0 0;font-size:13.5px;color:#0b5c3d;background:#f6fbf9;
+  border-left:3px solid var(--green);padding:5px 10px;border-radius:0 6px 6px 0}
+.item.ai .why{color:#134a9e;background:#f7faff;border-left-color:var(--blue)}
+.stats{margin-top:8px;font-size:12px;color:var(--faint);font-family:var(--mono);display:flex;gap:12px;flex-wrap:wrap}
+.stats b{color:var(--green);font-weight:700}
+.newtag{color:var(--green);font-weight:700}
+.detail{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+  font-size:13.8px;color:#3f4a5a;line-height:1.75}
+.detail.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(-3px)}to{opacity:1}}
+.detail a{color:var(--blue);font-size:13px;font-family:var(--mono)}
+.toggle{margin-top:9px;border:0;background:transparent;color:var(--blue);font:inherit;
+  font-size:12.5px;padding:0;cursor:pointer;font-weight:600}
+.toggle:hover{text-decoration:underline}
+footer{max-width:1180px;margin:auto;padding:18px 20px 50px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px}
+footer .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.hist a{color:var(--blue);font-family:var(--mono);font-size:12px}
+.warnbar{background:var(--red2);border-left:4px solid var(--red);color:#8b1f25;
+  padding:9px 14px;border-radius:8px;font-size:13.5px;margin:12px 0}
+@media(max-width:900px){.cols{grid-template-columns:1fr}.brief{grid-template-columns:1fr}}
+@media(max-width:520px){h1{font-size:22px}.brief div{padding:10px 13px;font-size:13.5px}
+  header{padding:20px 16px 16px}main{padding:18px 14px 30px}footer{padding:16px 14px 40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Daily Briefing · GitHub × 医药</div>
+    <h1>前沿日报</h1>
+    <div class="date">2026-11-17　周二</div>
+    <div class="brief">
+      <div class="ai"><b>AI 风向</b>agent 正从「会调工具」走向「自己接活、异步找人拍板」，skill 的组织方式成了新的竞争点。</div>
+      <div class="med"><b>医药风向</b>儿科肥胖 III 期与 GFR 替代终点同日出现：一个在解决跨年龄终点可比性，一个在验证替代指标。</div>
+    </div>
+    <div class="meta-bar">
+      <span>10 条 · 约 8 分钟读完</span>
+      <span>更新于 20:35</span>
+      <span>AI 扫描 180 个项目 · 医药 28 条候选</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  
+  <div class="cols">
+    <section>
+      <div class="sec-head"><h2>⚡ AI 前沿</h2><span>top 5</span></div>
+      
+      <article class="item ai">
+        <div class="hd"><span class="idx">01</span><span class="title"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">deepseek-ai/dsh-superagent-prototype</a></span></div>
+        <div class="stats"><span>⭐ 23.6k</span><span>TypeScript</span><span>17 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">DeepSeek 官方放出的自主 agent 系统原型，TypeScript 实现</p>
+        <p class="why">▎值得看：想做多步自主执行，这是目前最完整的公开骨架</p>
+        <div class="detail" id="ai-1"><p style="margin:0">仓库定位是「更自主的 agent 系统」，10 月底开源，两周涨到 2.3 万星。重点不在框架 API，而在任务分解、工具调度、失败重试的完整闭环——参考实现的价值是你不必自己从零试错循环终止条件。注意它是 prototype，生产用要自己补观测与权限边界。</p><div style="margin-top:8px"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-1">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">02</span><span class="title"><a href="https://github.com/janestreet/agent_skills" target="_blank">janestreet/agent_skills</a></span></div>
+        <div class="stats"><span>⭐ 9.8k</span><span>14 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">Jane Street 把自家 .agents 目录直接开源</p>
+        <p class="why">▎值得看：看顶级量化团队怎么切 skill 粒度，而不是只看 prompt 写法</p>
+        <div class="detail" id="ai-2"><p style="margin:0">内容不是模板库，而是一个真实团队日常在用的技能集合，每个 skill 带自己的触发条件和边界说明。对正在攒 skill 库的人，值得看的是「一件事该不该做成 skill」的判断标准，以及 skill 之间怎么避免职责重叠——这两点比写法难得多。</p><div style="margin-top:8px"><a href="https://github.com/janestreet/agent_skills" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-2">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">03</span><span class="title"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">KKKKhazix/agent-autoloop</a></span></div>
+        <div class="stats"><span>⭐ 5.8k</span><span>TypeScript</span><span>14 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">命令行 agent 后台自己接活，拿不准时发卡片找人拍板</p>
+        <p class="why">▎值得看：要跑长任务又不想盯着终端的场景</p>
+        <div class="detail" id="ai-3"><p style="margin:0">把「人在环上」做成异步审批：agent 在后台推进，只在需要决策时推一张卡片，你点完它继续。比全程守着终端可持续，也比全自动安全。适合数据抓取、批量处理、定时巡检这类任务。</p><div style="margin-top:8px"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-3">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">04</span><span class="title"><a href="https://github.com/hitkeeen/blender-ai-mcp-addon" target="_blank">hitkeeen/blender-ai-mcp-addon</a></span></div>
+        <div class="stats"><span>⭐ 2.4k</span><span>5 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">Blender 的 MCP server，带可视化对话和场景操作</p>
+        <p class="why">▎值得看：MCP 接进专业桌面软件的范式，可以移植</p>
+        <div class="detail" id="ai-4"><p style="margin:0">把 Blender 的场景操作暴露成 MCP 工具，模型能直接建模、改材质、调灯光，人也能用自然语言对话。模式可移植：任何有 Python API 的桌面软件（ImageJ、QGIS、RStudio）都能照这个思路包一层。</p><div style="margin-top:8px"><a href="https://github.com/hitkeeen/blender-ai-mcp-addon" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-4">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">05</span><span class="title"><a href="https://github.com/caru-ini/stack-diagram" target="_blank">caru-ini/stack-diagram</a></span></div>
+        <div class="stats"><span>⭐ 2.6k</span><span>TypeScript</span><span>16 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">一句话描述技术栈，直接生成架构图</p>
+        <p class="why">▎值得看：skill 做可视化的轻量范式，改造成数据流图很直接</p>
+        <div class="detail" id="ai-5"><p style="margin:0">打包成 agent skill 而不是独立服务——不需要部署，装进 .agents 目录就能用，输出是可直接编辑的 SVG/HTML。想改成「数据流图」或「试验流程图」，只需替换它内部的版式约束，不用重写渲染逻辑。</p><div style="margin-top:8px"><a href="https://github.com/caru-ini/stack-diagram" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-5">展开解读 ▾</button>
+      </article>
+    </section>
+    <section>
+      <div class="sec-head"><h2>💊 医药动态</h2><span>top 5</span></div>
+      
+      <article class="item med">
+        <div class="hd"><span class="idx">01</span><span class="src NEJM">NEJM</span><span class="title"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">司美格鲁肽治疗 6–12 岁儿童肥胖</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">III 期随机对照，评估每周一次司美格鲁肽在 6 至 12 岁以下儿童肥胖中的疗效与安全性。</p>
+        <p class="why">▎对你：儿科剂量选择与 BMI SDS 终点怎么处理</p>
+        <div class="detail" id="med-1"><p style="margin:0">儿科肥胖试验的难点不在疗效，而在终点：成人看体重百分比，儿童必须用 BMI SDS（标准差分数）才能跨年龄比较。这条的看点是把 6–12 岁这个窄年龄段一次做透，代价是样本量。如果你做儿科外推（ICH E11A 框架），这类试验的剂量-暴露桥接方法可以直接抄。</p><div style="margin-top:8px"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-1">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">02</span><span class="src NatMed">NatMed</span><span class="title"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">面向临床与生物医学发现的开放式 agent 协作者</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">Nature Medicine 刊出一个开放式 agentic AI 系统，用于临床与生物医学发现任务。</p>
+        <p class="why">▎对你：AI agent 进临床研究的真实形态，今天最该读的一条</p>
+        <div class="detail" id="med-2"><p style="margin:0">这是「agent 当科研协作者」的系统性工作，发在 Nature Medicine 而不是 arXiv，说明过了方法学审稿。核心看点是它怎么定义任务边界、怎么评估输出质量——如果用了人类专家评分或基准任务集，那套评估设计本身就能迁移到你的 clinstat-lm-eval 上。建议直接读方法部分。</p><div style="margin-top:8px"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-2">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">03</span><span class="src NatMed">NatMed</span><span class="title"><a href="https://www.nature.com/articles/s41591-026-04798-5" target="_blank">GFR 斜率作为肾脏终点替代指标的 meta 分析（补遗）</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">对 GFR 斜率作为肾脏病进展替代终点的 meta 分析作补充说明。</p>
+        <p class="why">▎对你：替代终点验证的方法学范本</p>
+        <div class="detail" id="med-3"><p style="margin:0">替代终点的验证是统计师最该懂的一件事：一个指标能不能替代硬终点，靠的不是相关性，而是「治疗对替代指标的影响能否解释对硬终点的效应」。这篇用 meta 分析做这件事，是 ICH E9(R1) 之后监管最认的论证方式。补遗本身不重要，值得看的是它的分析框架。</p><div style="margin-top:8px"><a href="https://www.nature.com/articles/s41591-026-04798-5" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-3">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">04</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/17/sellas-blood-cancer-immunotherapy-succeeds-clinical-trial/?utm_campaign=rss" target="_blank">Sellas 血液肿瘤免疫疗法在试验中降低死亡风险</a></span></div>
+        <div class="stats"><span>2026-11-17</span></div>
+        <p class="sum">II 期数据显示总生存获益，公司称将据此推进注册路径；样本量与随访时长尚未披露。</p>
+        <p class="why">▎对你：OS 当主要终点时的样本量膨胀代价</p>
+        <div class="detail" id="med-4"><p style="margin:0">OS 作主要终点的代价是样本量和随访时间，血液肿瘤里尤其明显。这条没披露具体数字，但值得追它后续的 interim 设计：中途看过数据的话，alpha 怎么分配、最终分析门槛怎么调，才是这类试验真正的技术含量。可以当作「II 期数据推注册」这条路径的观察样本。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/17/sellas-blood-cancer-immunotherapy-succeeds-clinical-trial/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-4">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">05</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/16/fda-approves-new-roche-breast-cancer-drug/?utm_campaign=rss" target="_blank">FDA 批准一款新的乳腺癌药物</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">为部分患者提供新选择；适应症范围与批准依据（ORR 还是 OS）需看原文。</p>
+        <p class="why">▎对你：加速批准与常规批准对统计设计的要求完全不同</p>
+        <div class="detail" id="med-5"><p style="margin:0">乳腺癌新药审批里，加速批准（基于 ORR/DoR）和常规批准（基于 OS/PFS）对设计的要求差很远：前者要承诺上市后确证性试验，后者要把 III 期终点做硬。看这条时值得追一下它走的是哪条路径——这决定了后面确证性试验长什么样，也决定你在类似项目上要准备多少样本量论证。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/16/fda-approves-new-roche-breast-cancer-drug/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-5">展开解读 ▾</button>
+      </article>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>数据源</b>　GitHub Search API（star 日增快照差分）· STAT · NEJM · The Lancet · JAMA · Nature Medicine · Nature Biotechnology</div>
+    <div class="row">
+      <span>每日 20:35 自动更新</span>
+      <span>监管动态由 STAT 报道覆盖（FDA/EMA 官网 RSS 在本机不可达）</span>
+    </div>
+    <div class="row hist"><span>近期归档</span><a href="archive/2026-11-17.html">11-17</a></div>
+    <div class="row"><span>摘要与点评为编辑整理，点标题看原文；数字以原文为准。</span></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.toggle').forEach(function(b){
+  b.addEventListener('click',function(){
+    var d=document.getElementById(b.dataset.t);
+    var on=d.classList.toggle('on');
+    b.textContent = on ? '收起 ▴' : '展开解读 ▾';
+  });
+});
+</script>
+</body>
+</html>
