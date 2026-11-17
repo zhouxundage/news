@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="zh-CN"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>趋势 · 近 30 天 AI 与医药</title>
+<style>
+:root{
+  --blue:#1f6feb; --blue2:#e8f1fe; --green:#0f7b52; --green2:#e6f5ef;
+  --orange:#f08c00; --orange2:#fff4e5; --red:#d9363e; --red2:#fdecec;
+  --ink:#1f2937; --mute:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --bg:#f8fafc; --mono:ui-monospace,Consolas,"Microsoft YaHei",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.75 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:var(--blue);text-decoration:none}
+header{background:#fff;border-bottom:1px solid var(--line);padding:26px max(20px,4vw) 20px}
+.wrap{max-width:960px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700}
+h1{font-size:30px;margin:6px 0 2px;font-weight:700;letter-spacing:-.015em}
+.period{color:var(--mute);font-size:14px}
+.kpis{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-top:16px}
+.kpi{background:#fff;border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+.kpi b{display:block;font:700 22px/1.2 var(--mono);color:var(--blue)}
+.kpi span{font-size:12px;color:var(--faint)}
+main{max-width:960px;margin:auto;padding:26px 20px 50px}
+h2{font-size:21px;margin:34px 0 4px;letter-spacing:-.01em}
+h2 .sub{font-size:12px;color:var(--faint);font-family:var(--mono);font-weight:400;margin-left:8px}
+.lead{color:var(--mute);font-size:14.5px;margin:0 0 14px}
+.theme{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px 20px;margin:14px 0}
+.theme h3{font-size:17px;margin:0 0 6px;display:flex;gap:9px;align-items:baseline}
+.theme h3 .n{font:700 12px var(--mono);color:#c7cdd6}
+.theme.ai{border-left:4px solid var(--blue)}
+.theme.med{border-left:4px solid var(--green)}
+.theme.cross{border-left:4px solid var(--orange)}
+.body{font-size:14.5px;color:#374151;margin:6px 0 0}
+.ex{margin:12px 0 0;border-top:1px dashed var(--line);padding-top:10px}
+.ex .row{display:flex;gap:10px;padding:5px 0;font-size:13.5px;align-items:baseline}
+.ex .name{font-weight:650;flex:none;max-width:40%;overflow-wrap:anywhere}
+.ex .metric{font:12px var(--mono);color:var(--faint);flex:none}
+.ex .note{color:#4b5563}
+.chart{background:#fff;border:1px solid var(--line);border-radius:14px;padding:18px;margin:14px 0}
+.bars{display:flex;gap:10px;align-items:flex-end;height:130px;margin-top:10px}
+.bar{flex:1;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;gap:4px}
+.bar i{display:block;width:100%;background:linear-gradient(180deg,#3b82f6,#1f6feb);border-radius:6px 6px 0 0;min-height:3px}
+.bar em{font:11px var(--mono);color:var(--faint);font-style:normal}
+.bar b{font:600 12px var(--mono);color:var(--ink)}
+.take{background:var(--blue2);border-left:4px solid var(--blue);border-radius:10px;padding:14px 18px;margin:10px 0}
+.take ol{margin:6px 0 0;padding-left:22px;font-size:14.5px}
+.take li{margin:6px 0}
+footer{max-width:960px;margin:auto;padding:16px 20px 50px;border-top:1px solid var(--line);color:var(--faint);font-size:12.5px}
+@media(max-width:600px){h1{font-size:23px}main,header,footer{padding-left:14px;padding-right:14px}
+  .ex .name{max-width:100%}.ex .row{flex-wrap:wrap}}
+</style></head>
+<body>
+<header><div class="wrap">
+  <div class="eyebrow">Trend Report · 30 Days</div>
+  <h1>近 30 天趋势</h1>
+  <div class="period">2026-10-18 → 2026-11-17　·　生成于 2026-11-17 21:44</div>
+  <div class="kpis">
+    <div class="kpi"><b>225</b><span>新建 AI 项目</span></div>
+    <div class="kpi"><b>239k</b><span>累计星标</span></div>
+    <div class="kpi"><b>6</b><span>医药信息源</span></div>
+    <div class="kpi"><b>1</b><span>日报覆盖天数</span></div>
+  </div>
+</div></header>
+
+<main>
+  <h2>⚡ AI 侧<span class="sub">GitHub · 近 30 天新建 · 按 star 排序</span></h2>
+  <p class="lead">这段时间一共出现 225 个值得记录的 AI 项目，累计 239,499 星。
+  高频主题：agent <b style='color:#1f6feb'>178</b> · ai-agents <b style='color:#1f6feb'>109</b> · ai <b style='color:#1f6feb'>73</b> · mcp <b style='color:#1f6feb'>69</b> · gemeni <b style='color:#1f6feb'>62</b> · chatbot <b style='color:#1f6feb'>46</b> · claude-code <b style='color:#1f6feb'>43</b> · anthropic <b style='color:#1f6feb'>43</b> · ai-sdk <b style='color:#1f6feb'>41</b> · function-calling <b style='color:#1f6feb'>41</b></p>
+
+  <div class="chart">
+    <div style="font-size:13px;color:#6b7280">每周新建项目数（按建仓日归组）</div>
+    <div class="bars"><div class="bar"><b>56</b><i style="height:64%"></i><em>10-19</em></div><div class="bar"><b>52</b><i style="height:59%"></i><em>10-26</em></div><div class="bar"><b>28</b><i style="height:32%"></i><em>11-02</em></div><div class="bar"><b>87</b><i style="height:100%"></i><em>11-09</em></div><div class="bar"><b>2</b><i style="height:4%"></i><em>11-16</em></div></div>
+  </div>
+
+  <div class="theme ai">
+  <h3><span class="n">01</span>agent 的竞争点从「能调工具」转向「怎么收工」</h3>
+  <p class="body">225 个新项目里 agent 相关占 178 个（79%），但叙事已经变了。上半年比的是工具数量和协议（MCP、function calling），这个月的新项目更多在解三个问题：循环何时终止、拿不准时找谁、失败怎么重试。这是个信号——工具调用已经商品化，剩下的难点全在控制流和人在环设计上。</p>
+  <div class="ex"><div class="row"><span class="name">deepseek-ai/dsh-superagent-prototype</span><span class="metric">⭐23.6k</span><span class="note">官方自主 agent 原型，任务分解 + 重试闭环</span></div><div class="row"><span class="name">KKKKhazix/agent-autoloop</span><span class="metric">⭐5.8k</span><span class="note">后台接活，拿不准时发卡片找人拍板</span></div><div class="row"><span class="name">N1nEmAn/sapper-v2</span><span class="metric">⭐2.2k</span><span class="note">自主渗透测试，多角色协作</span></div></div>
+</div><div class="theme ai">
+  <h3><span class="n">02</span>skill 成了新的分发单位</h3>
+  <p class="body">这个月最值得注意的不是某个框架，而是「skill」作为打包与复用单位被大机构公开：Jane Street 放出了自家 .agents 目录，Anthropic、addyosmani 也在维护 skill 集合。本质是把「怎么用工具」的经验固化成带触发条件的文件，而不是每次重写 prompt。代价是质量参差——同一个名字下，「一句话模板」和「带边界说明与失败处理的技能包」差得很远。</p>
+  <div class="ex"><div class="row"><span class="name">janestreet/agent_skills</span><span class="metric">⭐9.8k</span><span class="note">量化团队的技能组织方式，带触发条件</span></div><div class="row"><span class="name">anthropics/skills</span><span class="metric">⭐196k</span><span class="note">官方 skill 参考实现</span></div><div class="row"><span class="name">addyosmani/agent-skills</span><span class="metric">⭐118k</span><span class="note">工程化 skill 集合</span></div></div>
+</div><div class="theme ai">
+  <h3><span class="n">03</span>agent 走进具体设备与软件</h3>
+  <p class="body">另一条线是垂直落地：不再追求通用浏览器 agent，而是嵌进具体环境。安卓端靠无障碍服务操作 App，Blender 通过 MCP 暴露场景操作，3D 建模也在做同样的事。这类项目的价值不在模型能力，而在「把一个软件的 API 翻译成模型能可靠调用的动作」——活很枯燥，但没有替代品，而且一旦做成就是个护城河。</p>
+  <div class="ex"><div class="row"><span class="name">wangzan101/Mika</span><span class="metric">⭐8.9k</span><span class="note">安卓端侧 agent，无障碍服务操作 App</span></div><div class="row"><span class="name">hitkeeen/blender-ai-mcp-addon</span><span class="metric">⭐2.4k</span><span class="note">Blender 的 MCP server + 可视化对话</span></div><div class="row"><span class="name">Sandflow-ai/sand3d</span><span class="metric">⭐2.1k</span><span class="note">面向 LLM 的 3D 建模</span></div></div>
+</div>
+
+  <h2>💊 医药侧<span class="sub">STAT / NEJM / Lancet / JAMA / Nature</span></h2>
+  <p class="lead">日报已累计 1 天、28 条原始条目；
+  趋势判断结合了顶刊近期发表与监管动态。</p>
+  <div class="theme med">
+  <h3><span class="n">01</span>代谢赛道：终点正在变复杂</h3>
+  <p class="body">司美格鲁肽做到 6–12 岁儿童，retatrutide 转向「肥胖合并膝骨关节炎疼痛」。同一类药物，终点从「减重百分比」扩到「疼痛与功能」，意味着试验要从单一优效性转向多终点 + 临床意义阈值的复合判断：样本量重算、alpha 分配重做、缺失数据处理策略也要跟着改。这是 GLP-1 时代给统计师带来的真实工作量。</p>
+  <div class="ex"><div class="row"><span class="name">Semaglutide · 6–12 岁肥胖</span><span class="metric">NEJM 11-16</span><span class="note">儿科 BMI SDS 终点，跨年龄可比性</span></div><div class="row"><span class="name">Retatrutide · 膝骨关节炎</span><span class="metric">NEJM</span><span class="note">疼痛 + 体重复合终点</span></div><div class="row"><span class="name">Pelacarsen · Lp(a)</span><span class="metric">NEJM</span><span class="note">生物标志物到心血管硬终点</span></div></div>
+</div><div class="theme med">
+  <h3><span class="n">02</span>替代终点正在被系统性验证</h3>
+  <p class="body">Nature Medicine 的 GFR 斜率 meta 分析（补遗）是这期最「方法学」的一条。替代终点的合法性不靠相关性，而靠「治疗对替代指标的作用能否解释对硬终点的作用」。这类 meta 分析是监管最认的论证方式，也是统计师能真正建立差异化能力的地方——比跑一个 ANCOVA 难得多，也值钱得多。</p>
+  <div class="ex"><div class="row"><span class="name">GFR 斜率作为肾脏终点</span><span class="metric">Nature Medicine</span><span class="note">替代终点验证的 meta 分析框架</span></div><div class="row"><span class="name">Lp(a) 降低与 CV 结局</span><span class="metric">NEJM</span><span class="note">标志物到硬终点的桥接证据</span></div></div>
+</div><div class="theme med">
+  <h3><span class="n">03</span>监管批准集中在肿瘤与罕见病</h3>
+  <p class="body">近期 FDA 批准里肿瘤仍占多数（乳腺癌 ESR1 突变组合、膀胱癌围手术期），但肾病出现了「首个获批药物」这类节点。对统计师的含义：肿瘤项目的加速批准路径（ORR/DoR + 上市后确证性试验承诺）仍是主流，而罕见病与肾病更依赖单臂 + 外部对照——正好是贝叶斯借力的用武之地。</p>
+  <div class="ex"><div class="row"><span class="name">giredestrant + everolimus</span><span class="metric">FDA</span><span class="note">ER+/HER2−/ESR1 突变乳腺癌</span></div><div class="row"><span class="name">durvalumab + EV</span><span class="metric">FDA</span><span class="note">肌层浸润性膀胱癌围手术期</span></div><div class="row"><span class="name">首个原发性膜性肾病药物</span><span class="metric">FDA</span><span class="note">罕见肾病，单臂路径值得关注</span></div></div>
+</div>
+
+  <h2>🔗 交叉点<span class="sub">AI × 医药</span></h2>
+  <div class="theme cross">
+  <h3><span class="n">01</span>AI 的落点是「试验设计」，不是「诊断」</h3>
+  <p class="body">Nature Medicine 刊出一个开放式 agentic co-scientist；Expert.ai 与 Springer Nature 合作做 AI 辅助试验设计。方向很清楚：AI 在临床研究里的价值正从影像/诊断转向设计、文献、文档这些认知劳动。对做统计的人，这既是威胁也是机会——能被 agent 替代的是重复的表格生成与文献整理，不能被替代的是「这个设计能不能说服审评员」。</p>
+  <div class="ex"><div class="row"><span class="name">Open agentic AI co-scientist</span><span class="metric">Nature Medicine</span><span class="note">临床与生物医学发现的开放式 agent</span></div><div class="row"><span class="name">Expert.ai × Springer Nature</span><span class="metric">产业</span><span class="note">AI 辅助临床试验设计</span></div></div>
+</div>
+
+  <h2>📌 对统计师的三条 takeaway</h2>
+  <div class="take"><ol><li>学 agent 的重心从「用哪个框架」转到「循环怎么终止、什么时候交给人」——新项目 79% 是 agent，但真正的难点在控制流。</li><li>替代终点与借力的方法学是这个月医药侧最值得投入的方向：GFR 斜率、Lp(a)、罕见病单臂，指向同一套论证逻辑。</li><li>AI 在临床研究的落点是设计与文档，不是诊断。会写 SAP、会论证先验的人，短期内不会被替代。</li></ol></div>
+
+</main>
+<footer><div class="wrap">
+  数据：GitHub Search API（按建仓日回溯，非 trending 复刻）· 医药条目来自每日 RSS 抓取与顶刊检索。<br>
+  star 数会随时间变化，文中数字为生成时刻快照。趋势判断为编辑观点，不是投资或监管建议。<br>
+  <a href="index.html">← 回到今日日报</a>
+</div></footer>
+</body></html>
