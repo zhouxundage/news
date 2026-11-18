@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>前沿日报 · 2026-11-18</title>
+<style>
+:root{
+  --blue:#1f6feb; --blue2:#e8f1fe;
+  --green:#0f7b52; --green2:#e6f5ef;
+  --orange:#f08c00; --orange2:#fff4e5;
+  --red:#d9363e; --red2:#fdecec;
+  --ink:#1f2937; --mute:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --bg:#f8fafc;
+  --mono:ui-monospace,Consolas,"Microsoft YaHei",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16px/1.7 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:inherit;text-decoration:none}
+header{background:#fff;border-bottom:1px solid var(--line);padding:26px max(20px,4vw) 20px}
+.wrap{max-width:1180px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700}
+h1{font-size:30px;margin:6px 0 2px;font-weight:700;letter-spacing:-.015em}
+.date{color:var(--mute);font-size:14px}
+.brief{margin-top:16px;display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.brief div{padding:12px 16px;border-radius:10px;font-size:14.5px;line-height:1.65}
+.brief .ai{background:var(--blue2);border-left:4px solid var(--blue);color:#134a9e}
+.brief .med{background:var(--green2);border-left:4px solid var(--green);color:#0b5c3d}
+.brief b{display:block;font-size:12px;letter-spacing:.06em;text-transform:uppercase;margin-bottom:3px;opacity:.85}
+.meta-bar{display:flex;gap:16px;flex-wrap:wrap;margin-top:14px;font-size:12.5px;color:var(--faint)}
+main{max-width:1180px;margin:auto;padding:24px 20px 40px}
+.cols{display:grid;grid-template-columns:1fr 1fr;gap:26px}
+.cols>section{min-width:0}
+.sec-head{display:flex;align-items:baseline;justify-content:space-between;
+  margin:0 0 10px;padding-bottom:8px;border-bottom:2px solid var(--line)}
+.sec-head h2{font-size:17px;margin:0;font-weight:700}
+.sec-head span{font-size:12px;color:var(--faint);font-family:var(--mono)}
+.item{background:#fff;border:1px solid var(--line);border-radius:12px;padding:15px 17px;margin:10px 0;
+  transition:border-color .15s}
+.item:hover{border-color:#d5dbe4}
+.hd{display:flex;gap:9px;align-items:baseline}
+.idx{font-family:var(--mono);font-size:12px;color:#c7cdd6;font-weight:700;flex:none}
+.title{font-size:15.5px;font-weight:650;line-height:1.45;overflow-wrap:anywhere}
+.title a:hover{color:var(--blue)}
+.src{font-size:11px;padding:1px 7px;border-radius:4px;font-weight:700;letter-spacing:.03em;flex:none}
+.src.STAT{background:var(--orange2);color:#b35c00}
+.src.NEJM{background:var(--blue2);color:#134a9e}
+.src.Lancet{background:var(--red2);color:var(--red)}
+.src.JAMA{background:#f2eefc;color:#6542b8}
+.src.NatMed,.src.NatBiotech{background:var(--green2);color:var(--green)}
+.sum{margin:7px 0 0;font-size:14px;color:#374151;line-height:1.65;overflow-wrap:anywhere}
+.why{margin:8px 0 0;font-size:13.5px;color:#0b5c3d;background:#f6fbf9;
+  border-left:3px solid var(--green);padding:5px 10px;border-radius:0 6px 6px 0}
+.item.ai .why{color:#134a9e;background:#f7faff;border-left-color:var(--blue)}
+.stats{margin-top:8px;font-size:12px;color:var(--faint);font-family:var(--mono);display:flex;gap:12px;flex-wrap:wrap}
+.stats b{color:var(--green);font-weight:700}
+.newtag{color:var(--green);font-weight:700}
+.detail{display:none;margin-top:10px;padding-top:10px;border-top:1px dashed var(--line);
+  font-size:13.8px;color:#3f4a5a;line-height:1.75}
+.detail.on{display:block;animation:fade .25s}
+@keyframes fade{from{opacity:0;transform:translateY(-3px)}to{opacity:1}}
+.detail a{color:var(--blue);font-size:13px;font-family:var(--mono)}
+.toggle{margin-top:9px;border:0;background:transparent;color:var(--blue);font:inherit;
+  font-size:12.5px;padding:0;cursor:pointer;font-weight:600}
+.toggle:hover{text-decoration:underline}
+footer{max-width:1180px;margin:auto;padding:18px 20px 50px;border-top:1px solid var(--line);
+  color:var(--faint);font-size:12.5px}
+footer .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;align-items:center}
+.hist a{color:var(--blue);font-family:var(--mono);font-size:12px}
+.warnbar{background:var(--red2);border-left:4px solid var(--red);color:#8b1f25;
+  padding:9px 14px;border-radius:8px;font-size:13.5px;margin:12px 0}
+@media(max-width:900px){.cols{grid-template-columns:1fr}.brief{grid-template-columns:1fr}}
+@media(max-width:520px){h1{font-size:22px}.brief div{padding:10px 13px;font-size:13.5px}
+  header{padding:20px 16px 16px}main{padding:18px 14px 30px}footer{padding:16px 14px 40px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <div class="eyebrow">Daily Briefing · GitHub × 医药</div>
+    <h1>前沿日报</h1>
+    <div class="date">2026-11-18　周三</div>
+    <div class="brief">
+      <div class="ai"><b>AI 风向</b>agent 从能跑转向能验收：自主循环、行为对照、显存可观测</div>
+      <div class="med"><b>医药风向</b>FDA 高层空缺延长，AI 支付路线图与儿科肥胖证据同周落地</div>
+    </div>
+    <div class="meta-bar">
+      <span>10 条 · 约 8 分钟读完</span>
+      <span><a href="trend.html" style="color:#1f6feb;font-weight:600">📈 近 30 天趋势 →</a></span>
+      <span>更新于 09:02</span>
+      <span>AI 扫描 181 个项目 · 医药 28 条候选</span>
+    </div>
+  </div>
+</header>
+
+<main>
+  
+  <div class="cols">
+    <section>
+      <div class="sec-head"><h2>⚡ AI 前沿</h2><span>top 5</span></div>
+      
+      <article class="item ai">
+        <div class="hd"><span class="idx">01</span><span class="title"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">deepseek-ai/dsh-superagent-prototype</a></span></div>
+        <div class="stats"><span>⭐ 23.7k</span><span>TypeScript</span><span>18 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">DeepSeek 的自主 agent 系统原型，18 天冲到 2.3 万星</p>
+        <p class="why">▎值得看：看它怎么拆任务、自检、失败重规划——agent loop 骨架参考</p>
+        <div class="detail" id="ai-1"><p style="margin:0">定位是研究原型而非产品，真正值得读的是它把「更自主」拆成了三件可检验的事：任务分解、工具调用后的自检、失败后的重规划。建议读法：先看 README 的架构与 roadmap，再看 loop 的状态机实现，最后看它如何判定「这个任务算完成了」。对做评测的人，最后一点是关键——自主性越强，越需要一个外部可验证的完成判据，否则无法区分真做完和自认为做完。仓库只有 18 天，接口会变，别当稳定依赖。</p><div style="margin-top:8px"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-1">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">02</span><span class="title"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">KKKKhazix/agent-autoloop</a></span></div>
+        <div class="stats"><span>⭐ 5.8k</span><span>TypeScript</span><span>15 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">让命令行 agent 在后台自己接活跟进，只在拿不准时发卡片找人拍板</p>
+        <p class="why">▎值得看：人机交接点显式化——正好是 agent 评测里最难量化的部分</p>
+        <div class="detail" id="ai-2"><p style="margin:0">事件驱动加人类审批卡片的组合：agent 平时在后台跑，遇到需要判断的节点才把决策打包成一张卡片推给人，避免每一步都来问。技术上是贴着 claude-code / codex 这类 CLI agent 做外挂循环。可借鉴的做法是把「需要人」的时机收敛成一个显式的待决队列，而不是散落在日志里等人翻。这跟长时间无人值守的统计编程流水线是同一类问题：跑数据、生成 TFL、异常挂起，都要有个地方集中拍板。</p><div style="margin-top:8px"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-2">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">03</span><span class="title"><a href="https://github.com/RunanywhereAI/trnrt" target="_blank">RunanywhereAI/trnrt</a></span></div>
+        <div class="stats"><span>⭐ 1.6k</span><span>Python</span><span>19 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">Trainium 上的开源 LLM 推理引擎，兼容 OpenAI API</p>
+        <p class="why">▎值得看：换硬件不换客户端——评测脚本只认 base_url 和参数</p>
+        <div class="detail" id="ai-3"><p style="margin:0">主打手写 NKI megakernel、宣称支持百万级 token 上下文，对外暴露 OpenAI 兼容接口。对做评测的实际意义在这层兼容性：同一套 prompt 与评分脚本可平移到不同后端，把「模型能力」和「服务实现」解耦，避免结论被某个框架的默认采样参数污染。Trainium 是 AWS 自研芯片，供给与成本曲线不同于 GPU，所以更要看它在长上下文和并发下是否稳，而不只是能跑通 demo。</p><div style="margin-top:8px"><a href="https://github.com/RunanywhereAI/trnrt" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-3">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">04</span><span class="title"><a href="https://github.com/shanselman/gputaskman" target="_blank">shanselman/gputaskman</a></span></div>
+        <div class="stats"><span>⭐ 3.5k</span><span>Python</span><span>15 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">GPU 任务管理器：WSL 下每进程显存与 KV cache</p>
+        <p class="why">▎值得看：本机跑模型的显存账，终于有进程级的答案</p>
+        <div class="detail" id="ai-4"><p style="margin:0">覆盖 NVIDIA、AMD、Intel，Linux 上还支持昇腾；除每进程 VRAM 与利用率，还专门给出 LLM 的模型占用与 KV cache 洞察。对 Windows 加 WSL 双栈、模型和桌面程序抢同一张卡的环境，最缺的就是「这块显存是谁吃的」。实用价值在排查 OOM 和反推上下文上限：KV cache 随上下文增长，知道它占多少才能判断 max_tokens 还能开多长，而不是靠试错。</p><div style="margin-top:8px"><a href="https://github.com/shanselman/gputaskman" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-4">展开解读 ▾</button>
+      </article>
+      <article class="item ai">
+        <div class="hd"><span class="idx">05</span><span class="title"><a href="https://github.com/erkamyaman/rust-anything" target="_blank">erkamyaman/rust-anything</a></span></div>
+        <div class="stats"><span>⭐ 1.3k</span><span>Rust</span><span>2 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">逐块把应用重写成 Rust，每步对照原版录制行为</p>
+        <p class="why">▎值得看：用可重放的行为当裁判——和你拿 CORE 规则当裁判同构</p>
+        <div class="detail" id="ai-5"><p style="margin:0">两天新仓，思路是「行为等价」而非「代码相似」：先把原实现的输入输出录下来当基线，每迁移一个模块就跑一遍对照，不一致就停下修，而不是靠人读 diff 判断像不像。这跟你给临床统计 LLM 找客观裁判是同一套方法论——先固定可执行的判据，再让模型自由发挥。可移用的具体做法：把「正确」沉淀成可重放的用例集，并盯住用例覆盖面，因为覆盖不到的地方，迁移和评测都会假通过。</p><div style="margin-top:8px"><a href="https://github.com/erkamyaman/rust-anything" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="ai-5">展开解读 ▾</button>
+      </article>
+    </section>
+    <section>
+      <div class="sec-head"><h2>💊 医药动态</h2><span>top 5</span></div>
+      
+      <article class="item med">
+        <div class="hd"><span class="idx">01</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/17/heidi-overton-fda-commissioner-nomination-withdrawn/?utm_campaign=rss" target="_blank">白宫撤回 FDA 局长提名</a></span></div>
+        <div class="stats"><span>2026-11-18</span></div>
+        <p class="sum">原提名人 Overton 的提名被撤回，FDA 高层空缺继续延长</p>
+        <p class="why">▎对你：审批节奏受人手牵制——递交时间表要留政策缓冲</p>
+        <div class="detail" id="med-1"><p style="margin:0">白宫在推进受阻后撤回 Overton 的 FDA 局长提名，此前她已因电子烟相关经历承压。对制药端的传导不看人只看流程：局长缺位时常规审评照旧，但涉及跨部门优先级、加速通道认定、以及需要高层背书的争议决定通常会变慢。做递交计划时把监管不确定性当风险项而不是异常项——PDUFA 日期是承诺，但沟通节奏不是，中期分析和资料补交的窗口都要留余量。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/17/heidi-overton-fda-commissioner-nomination-withdrawn/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-1">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">02</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/pharmalot/2026/11/17/roche-breast-cancer-pill-obesity-drugs-in-children/?utm_campaign=rss" target="_blank">FDA 批准罗氏乳腺癌口服药</a></span></div>
+        <div class="stats"><span>2026-11-17</span></div>
+        <p class="sum">罗氏一款乳腺癌口服药获 FDA 批准，公司称可能成为最畅销产品</p>
+        <p class="why">▎对你：口服剂型进一线，依从性与 PFS 读数会被重新追问</p>
+        <div class="detail" id="med-2"><p style="margin:0">Pharmalittle 当天最实的一条：罗氏乳腺癌口服药拿到 FDA 批准，公司此前把它定位成潜在最畅销产品。口服与静脉的差别不止给药途径，它直接改写三期设计：若走非劣效，界值要事先论证；开放标签下 PFS 的评估偏倚要靠盲态阅片兜住；交叉用药会稀释后续 OS 的读数。患者报告结局和依从性因此从次要指标升为差异化证据。同条目还提到儿童肥胖用药，与 NEJM 那篇儿科试验是同一方向。</p><div style="margin-top:8px"><a href="https://www.statnews.com/pharmalot/2026/11/17/roche-breast-cancer-pill-obesity-drugs-in-children/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-2">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">03</span><span class="src NEJM">NEJM</span><span class="title"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">司美格鲁肽治疗 6 至 12 岁以下儿童肥胖</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">NEJM 在线发表司美格鲁肽用于 6 至 12 岁以下儿童肥胖的研究</p>
+        <p class="why">▎对你：低龄段的剂量-暴露关系，比成人多一层儿科外推问题</p>
+        <div class="detail" id="med-3"><p style="margin:0">NEJM 的 ahead-of-print 试验，人群卡在 6 岁到 12 岁以下，正好是儿科与青春期的分界。统计上要盯三点：一是按年龄或体重分层的剂量依据，儿童暴露量对体重更敏感，固定剂量往往站不住；二是主要终点取 BMI 百分位还是绝对 BMI，两者的效应量不可互换，直接决定样本量估算；三是安慰剂组的生长与青春期进展如何记录，否则分不清药物效应和发育本身。</p><div style="margin-top:8px"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-3">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">04</span><span class="src NatMed">NatMed</span><span class="title"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">开源 agentic AI 科研协作者</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">Nature Medicine 刊出面向临床与生物医学发现的开源 agent 系统</p>
+        <p class="why">▎对你：agent 进科研流程，可复现性与责任归属怎么落地</p>
+        <div class="detail" id="med-4"><p style="margin:0">论文给的是一个开放式的 agentic co-scientist，把假设生成、文献与数据检索、分析执行串成可迭代的流程，重点在「开源」——方法可审、prompt 可查，才有可能被独立复现。对做评测的人它提出一个硬问题：怎么证明产出不是把检索到的既有结论重新包装？可行的判据是拿未发表的假说做盲测，并要求过程日志可回放。对统计岗，模型做探索、人负责假设检验与结论，这条边界不能因为流程自动化就模糊。</p><div style="margin-top:8px"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-4">展开解读 ▾</button>
+      </article>
+      <article class="item med">
+        <div class="hd"><span class="idx">05</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/17/cms-ai-roadmap-and-news-from-hlth-health-tech/?utm_campaign=rss" target="_blank">CMS 发布 AI 路线图</a></span></div>
+        <div class="stats"><span>2026-11-17</span></div>
+        <p class="sum">美国 CMS 公布 AI 路线图，STAT 梳理要点并报道 HLTH 大会动向</p>
+        <p class="why">▎对你：支付方定调，决定 AI 工具进临床的经济前提</p>
+        <div class="detail" id="med-5"><p style="margin:0">CMS 这份路线图值得看的不是技术选型，而是它把 AI 放在医保体系的哪个位置：覆盖决定、质量指标，还是行政流程自动化。这决定医院和药企有没有动力把 AI 嵌进真实工作流——没有支付路径的工具最后都停在试点。对统计与编程侧的连带影响是数据口径：一旦 AI 输出要进质量报告或索赔数据，就需要可审计的版本记录、验证集说明和固定的评估口径，这跟临床数据标准化的工程问题同源。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/17/cms-ai-roadmap-and-news-from-hlth-health-tech/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <button class="toggle" data-t="med-5">展开解读 ▾</button>
+      </article>
+    </section>
+  </div>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div><b>数据源</b>　GitHub Search API（star 日增快照差分）· STAT · NEJM · The Lancet · JAMA · Nature Medicine · Nature Biotechnology</div>
+    <div class="row">
+      <span>每日 20:35 自动更新</span>
+      <span>监管动态由 STAT 报道覆盖（FDA/EMA 官网 RSS 在本机不可达）</span>
+    </div>
+    <div class="row hist"><span>近期归档</span><a href="archive/2026-11-17.html">11-17</a></div>
+    <div class="row"><span>摘要与点评为编辑整理，点标题看原文；数字以原文为准。</span></div>
+  </div>
+</footer>
+<script>
+document.querySelectorAll('.toggle').forEach(function(b){
+  b.addEventListener('click',function(){
+    var d=document.getElementById(b.dataset.t);
+    var on=d.classList.toggle('on');
+    b.textContent = on ? '收起 ▴' : '展开解读 ▾';
+  });
+});
+</script>
+</body>
+</html>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>前沿日报 · 2026-11-17</title>
+<title>前沿日报 · 2026-11-18</title>
 <style>
 :root{
   --blue:#1f6feb; --blue2:#e8f1fe;
@@ -80,16 +80,16 @@ footer .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;align-items:cent
   <div class="wrap">
     <div class="eyebrow">Daily Briefing · GitHub × 医药</div>
     <h1>前沿日报</h1>
-    <div class="date">2026-11-17　周二</div>
+    <div class="date">2026-11-18　周三</div>
     <div class="brief">
-      <div class="ai"><b>AI 风向</b>agent 正从「会调工具」走向「自己接活、异步找人拍板」，skill 的组织方式成了新的竞争点。</div>
-      <div class="med"><b>医药风向</b>儿科肥胖 III 期与 GFR 替代终点同日出现：一个在解决跨年龄终点可比性，一个在验证替代指标。</div>
+      <div class="ai"><b>AI 风向</b>agent 从能跑转向能验收：自主循环、行为对照、显存可观测</div>
+      <div class="med"><b>医药风向</b>FDA 高层空缺延长，AI 支付路线图与儿科肥胖证据同周落地</div>
     </div>
     <div class="meta-bar">
       <span>10 条 · 约 8 分钟读完</span>
       <span><a href="trend.html" style="color:#1f6feb;font-weight:600">📈 近 30 天趋势 →</a></span>
-      <span>更新于 20:35</span>
-      <span>AI 扫描 180 个项目 · 医药 28 条候选</span>
+      <span>更新于 09:02</span>
+      <span>AI 扫描 181 个项目 · 医药 28 条候选</span>
     </div>
   </div>
 </header>
@@ -102,42 +102,42 @@ footer .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;align-items:cent
       
       <article class="item ai">
         <div class="hd"><span class="idx">01</span><span class="title"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">deepseek-ai/dsh-superagent-prototype</a></span></div>
-        <div class="stats"><span>⭐ 23.6k</span><span>TypeScript</span><span>17 天</span><span class="newtag">NEW</span></div>
-        <p class="sum">DeepSeek 官方放出的自主 agent 系统原型，TypeScript 实现</p>
-        <p class="why">▎值得看：想做多步自主执行，这是目前最完整的公开骨架</p>
-        <div class="detail" id="ai-1"><p style="margin:0">仓库定位是「更自主的 agent 系统」，10 月底开源，两周涨到 2.3 万星。重点不在框架 API，而在任务分解、工具调度、失败重试的完整闭环——参考实现的价值是你不必自己从零试错循环终止条件。注意它是 prototype，生产用要自己补观测与权限边界。</p><div style="margin-top:8px"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">读原文 ↗</a></div></div>
+        <div class="stats"><span>⭐ 23.7k</span><span>TypeScript</span><span>18 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">DeepSeek 的自主 agent 系统原型，18 天冲到 2.3 万星</p>
+        <p class="why">▎值得看：看它怎么拆任务、自检、失败重规划——agent loop 骨架参考</p>
+        <div class="detail" id="ai-1"><p style="margin:0">定位是研究原型而非产品，真正值得读的是它把「更自主」拆成了三件可检验的事：任务分解、工具调用后的自检、失败后的重规划。建议读法：先看 README 的架构与 roadmap，再看 loop 的状态机实现，最后看它如何判定「这个任务算完成了」。对做评测的人，最后一点是关键——自主性越强，越需要一个外部可验证的完成判据，否则无法区分真做完和自认为做完。仓库只有 18 天，接口会变，别当稳定依赖。</p><div style="margin-top:8px"><a href="https://github.com/deepseek-ai/dsh-superagent-prototype" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="ai-1">展开解读 ▾</button>
       </article>
       <article class="item ai">
-        <div class="hd"><span class="idx">02</span><span class="title"><a href="https://github.com/janestreet/agent_skills" target="_blank">janestreet/agent_skills</a></span></div>
-        <div class="stats"><span>⭐ 9.8k</span><span>14 天</span><span class="newtag">NEW</span></div>
-        <p class="sum">Jane Street 把自家 .agents 目录直接开源</p>
-        <p class="why">▎值得看：看顶级量化团队怎么切 skill 粒度，而不是只看 prompt 写法</p>
-        <div class="detail" id="ai-2"><p style="margin:0">内容不是模板库，而是一个真实团队日常在用的技能集合，每个 skill 带自己的触发条件和边界说明。对正在攒 skill 库的人，值得看的是「一件事该不该做成 skill」的判断标准，以及 skill 之间怎么避免职责重叠——这两点比写法难得多。</p><div style="margin-top:8px"><a href="https://github.com/janestreet/agent_skills" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">02</span><span class="title"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">KKKKhazix/agent-autoloop</a></span></div>
+        <div class="stats"><span>⭐ 5.8k</span><span>TypeScript</span><span>15 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">让命令行 agent 在后台自己接活跟进，只在拿不准时发卡片找人拍板</p>
+        <p class="why">▎值得看：人机交接点显式化——正好是 agent 评测里最难量化的部分</p>
+        <div class="detail" id="ai-2"><p style="margin:0">事件驱动加人类审批卡片的组合：agent 平时在后台跑，遇到需要判断的节点才把决策打包成一张卡片推给人，避免每一步都来问。技术上是贴着 claude-code / codex 这类 CLI agent 做外挂循环。可借鉴的做法是把「需要人」的时机收敛成一个显式的待决队列，而不是散落在日志里等人翻。这跟长时间无人值守的统计编程流水线是同一类问题：跑数据、生成 TFL、异常挂起，都要有个地方集中拍板。</p><div style="margin-top:8px"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="ai-2">展开解读 ▾</button>
       </article>
       <article class="item ai">
-        <div class="hd"><span class="idx">03</span><span class="title"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">KKKKhazix/agent-autoloop</a></span></div>
-        <div class="stats"><span>⭐ 5.8k</span><span>TypeScript</span><span>14 天</span><span class="newtag">NEW</span></div>
-        <p class="sum">命令行 agent 后台自己接活，拿不准时发卡片找人拍板</p>
-        <p class="why">▎值得看：要跑长任务又不想盯着终端的场景</p>
-        <div class="detail" id="ai-3"><p style="margin:0">把「人在环上」做成异步审批：agent 在后台推进，只在需要决策时推一张卡片，你点完它继续。比全程守着终端可持续，也比全自动安全。适合数据抓取、批量处理、定时巡检这类任务。</p><div style="margin-top:8px"><a href="https://github.com/KKKKhazix/agent-autoloop" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">03</span><span class="title"><a href="https://github.com/RunanywhereAI/trnrt" target="_blank">RunanywhereAI/trnrt</a></span></div>
+        <div class="stats"><span>⭐ 1.6k</span><span>Python</span><span>19 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">Trainium 上的开源 LLM 推理引擎，兼容 OpenAI API</p>
+        <p class="why">▎值得看：换硬件不换客户端——评测脚本只认 base_url 和参数</p>
+        <div class="detail" id="ai-3"><p style="margin:0">主打手写 NKI megakernel、宣称支持百万级 token 上下文，对外暴露 OpenAI 兼容接口。对做评测的实际意义在这层兼容性：同一套 prompt 与评分脚本可平移到不同后端，把「模型能力」和「服务实现」解耦，避免结论被某个框架的默认采样参数污染。Trainium 是 AWS 自研芯片，供给与成本曲线不同于 GPU，所以更要看它在长上下文和并发下是否稳，而不只是能跑通 demo。</p><div style="margin-top:8px"><a href="https://github.com/RunanywhereAI/trnrt" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="ai-3">展开解读 ▾</button>
       </article>
       <article class="item ai">
-        <div class="hd"><span class="idx">04</span><span class="title"><a href="https://github.com/hitkeeen/blender-ai-mcp-addon" target="_blank">hitkeeen/blender-ai-mcp-addon</a></span></div>
-        <div class="stats"><span>⭐ 2.4k</span><span>5 天</span><span class="newtag">NEW</span></div>
-        <p class="sum">Blender 的 MCP server，带可视化对话和场景操作</p>
-        <p class="why">▎值得看：MCP 接进专业桌面软件的范式，可以移植</p>
-        <div class="detail" id="ai-4"><p style="margin:0">把 Blender 的场景操作暴露成 MCP 工具，模型能直接建模、改材质、调灯光，人也能用自然语言对话。模式可移植：任何有 Python API 的桌面软件（ImageJ、QGIS、RStudio）都能照这个思路包一层。</p><div style="margin-top:8px"><a href="https://github.com/hitkeeen/blender-ai-mcp-addon" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">04</span><span class="title"><a href="https://github.com/shanselman/gputaskman" target="_blank">shanselman/gputaskman</a></span></div>
+        <div class="stats"><span>⭐ 3.5k</span><span>Python</span><span>15 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">GPU 任务管理器：WSL 下每进程显存与 KV cache</p>
+        <p class="why">▎值得看：本机跑模型的显存账，终于有进程级的答案</p>
+        <div class="detail" id="ai-4"><p style="margin:0">覆盖 NVIDIA、AMD、Intel，Linux 上还支持昇腾；除每进程 VRAM 与利用率，还专门给出 LLM 的模型占用与 KV cache 洞察。对 Windows 加 WSL 双栈、模型和桌面程序抢同一张卡的环境，最缺的就是「这块显存是谁吃的」。实用价值在排查 OOM 和反推上下文上限：KV cache 随上下文增长，知道它占多少才能判断 max_tokens 还能开多长，而不是靠试错。</p><div style="margin-top:8px"><a href="https://github.com/shanselman/gputaskman" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="ai-4">展开解读 ▾</button>
       </article>
       <article class="item ai">
-        <div class="hd"><span class="idx">05</span><span class="title"><a href="https://github.com/caru-ini/stack-diagram" target="_blank">caru-ini/stack-diagram</a></span></div>
-        <div class="stats"><span>⭐ 2.6k</span><span>TypeScript</span><span>16 天</span><span class="newtag">NEW</span></div>
-        <p class="sum">一句话描述技术栈，直接生成架构图</p>
-        <p class="why">▎值得看：skill 做可视化的轻量范式，改造成数据流图很直接</p>
-        <div class="detail" id="ai-5"><p style="margin:0">打包成 agent skill 而不是独立服务——不需要部署，装进 .agents 目录就能用，输出是可直接编辑的 SVG/HTML。想改成「数据流图」或「试验流程图」，只需替换它内部的版式约束，不用重写渲染逻辑。</p><div style="margin-top:8px"><a href="https://github.com/caru-ini/stack-diagram" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">05</span><span class="title"><a href="https://github.com/erkamyaman/rust-anything" target="_blank">erkamyaman/rust-anything</a></span></div>
+        <div class="stats"><span>⭐ 1.3k</span><span>Rust</span><span>2 天</span><span class="newtag">NEW</span></div>
+        <p class="sum">逐块把应用重写成 Rust，每步对照原版录制行为</p>
+        <p class="why">▎值得看：用可重放的行为当裁判——和你拿 CORE 规则当裁判同构</p>
+        <div class="detail" id="ai-5"><p style="margin:0">两天新仓，思路是「行为等价」而非「代码相似」：先把原实现的输入输出录下来当基线，每迁移一个模块就跑一遍对照，不一致就停下修，而不是靠人读 diff 判断像不像。这跟你给临床统计 LLM 找客观裁判是同一套方法论——先固定可执行的判据，再让模型自由发挥。可移用的具体做法：把「正确」沉淀成可重放的用例集，并盯住用例覆盖面，因为覆盖不到的地方，迁移和评测都会假通过。</p><div style="margin-top:8px"><a href="https://github.com/erkamyaman/rust-anything" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="ai-5">展开解读 ▾</button>
       </article>
     </section>
@@ -145,43 +145,43 @@ footer .row{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px;align-items:cent
       <div class="sec-head"><h2>💊 医药动态</h2><span>top 5</span></div>
       
       <article class="item med">
-        <div class="hd"><span class="idx">01</span><span class="src NEJM">NEJM</span><span class="title"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">司美格鲁肽治疗 6–12 岁儿童肥胖</a></span></div>
-        <div class="stats"><span>2026-11-16</span></div>
-        <p class="sum">III 期随机对照，评估每周一次司美格鲁肽在 6 至 12 岁以下儿童肥胖中的疗效与安全性。</p>
-        <p class="why">▎对你：儿科剂量选择与 BMI SDS 终点怎么处理</p>
-        <div class="detail" id="med-1"><p style="margin:0">儿科肥胖试验的难点不在疗效，而在终点：成人看体重百分比，儿童必须用 BMI SDS（标准差分数）才能跨年龄比较。这条的看点是把 6–12 岁这个窄年龄段一次做透，代价是样本量。如果你做儿科外推（ICH E11A 框架），这类试验的剂量-暴露桥接方法可以直接抄。</p><div style="margin-top:8px"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">01</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/17/heidi-overton-fda-commissioner-nomination-withdrawn/?utm_campaign=rss" target="_blank">白宫撤回 FDA 局长提名</a></span></div>
+        <div class="stats"><span>2026-11-18</span></div>
+        <p class="sum">原提名人 Overton 的提名被撤回，FDA 高层空缺继续延长</p>
+        <p class="why">▎对你：审批节奏受人手牵制——递交时间表要留政策缓冲</p>
+        <div class="detail" id="med-1"><p style="margin:0">白宫在推进受阻后撤回 Overton 的 FDA 局长提名，此前她已因电子烟相关经历承压。对制药端的传导不看人只看流程：局长缺位时常规审评照旧，但涉及跨部门优先级、加速通道认定、以及需要高层背书的争议决定通常会变慢。做递交计划时把监管不确定性当风险项而不是异常项——PDUFA 日期是承诺，但沟通节奏不是，中期分析和资料补交的窗口都要留余量。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/17/heidi-overton-fda-commissioner-nomination-withdrawn/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="med-1">展开解读 ▾</button>
       </article>
       <article class="item med">
-        <div class="hd"><span class="idx">02</span><span class="src NatMed">NatMed</span><span class="title"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">面向临床与生物医学发现的开放式 agent 协作者</a></span></div>
-        <div class="stats"><span>2026-11-16</span></div>
-        <p class="sum">Nature Medicine 刊出一个开放式 agentic AI 系统，用于临床与生物医学发现任务。</p>
-        <p class="why">▎对你：AI agent 进临床研究的真实形态，今天最该读的一条</p>
-        <div class="detail" id="med-2"><p style="margin:0">这是「agent 当科研协作者」的系统性工作，发在 Nature Medicine 而不是 arXiv，说明过了方法学审稿。核心看点是它怎么定义任务边界、怎么评估输出质量——如果用了人类专家评分或基准任务集，那套评估设计本身就能迁移到你的 clinstat-lm-eval 上。建议直接读方法部分。</p><div style="margin-top:8px"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">02</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/pharmalot/2026/11/17/roche-breast-cancer-pill-obesity-drugs-in-children/?utm_campaign=rss" target="_blank">FDA 批准罗氏乳腺癌口服药</a></span></div>
+        <div class="stats"><span>2026-11-17</span></div>
+        <p class="sum">罗氏一款乳腺癌口服药获 FDA 批准，公司称可能成为最畅销产品</p>
+        <p class="why">▎对你：口服剂型进一线，依从性与 PFS 读数会被重新追问</p>
+        <div class="detail" id="med-2"><p style="margin:0">Pharmalittle 当天最实的一条：罗氏乳腺癌口服药拿到 FDA 批准，公司此前把它定位成潜在最畅销产品。口服与静脉的差别不止给药途径，它直接改写三期设计：若走非劣效，界值要事先论证；开放标签下 PFS 的评估偏倚要靠盲态阅片兜住；交叉用药会稀释后续 OS 的读数。患者报告结局和依从性因此从次要指标升为差异化证据。同条目还提到儿童肥胖用药，与 NEJM 那篇儿科试验是同一方向。</p><div style="margin-top:8px"><a href="https://www.statnews.com/pharmalot/2026/11/17/roche-breast-cancer-pill-obesity-drugs-in-children/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="med-2">展开解读 ▾</button>
       </article>
       <article class="item med">
-        <div class="hd"><span class="idx">03</span><span class="src NatMed">NatMed</span><span class="title"><a href="https://www.nature.com/articles/s41591-026-04798-5" target="_blank">GFR 斜率作为肾脏终点替代指标的 meta 分析（补遗）</a></span></div>
+        <div class="hd"><span class="idx">03</span><span class="src NEJM">NEJM</span><span class="title"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">司美格鲁肽治疗 6 至 12 岁以下儿童肥胖</a></span></div>
         <div class="stats"><span>2026-11-16</span></div>
-        <p class="sum">对 GFR 斜率作为肾脏病进展替代终点的 meta 分析作补充说明。</p>
-        <p class="why">▎对你：替代终点验证的方法学范本</p>
-        <div class="detail" id="med-3"><p style="margin:0">替代终点的验证是统计师最该懂的一件事：一个指标能不能替代硬终点，靠的不是相关性，而是「治疗对替代指标的影响能否解释对硬终点的效应」。这篇用 meta 分析做这件事，是 ICH E9(R1) 之后监管最认的论证方式。补遗本身不重要，值得看的是它的分析框架。</p><div style="margin-top:8px"><a href="https://www.nature.com/articles/s41591-026-04798-5" target="_blank">读原文 ↗</a></div></div>
+        <p class="sum">NEJM 在线发表司美格鲁肽用于 6 至 12 岁以下儿童肥胖的研究</p>
+        <p class="why">▎对你：低龄段的剂量-暴露关系，比成人多一层儿科外推问题</p>
+        <div class="detail" id="med-3"><p style="margin:0">NEJM 的 ahead-of-print 试验，人群卡在 6 岁到 12 岁以下，正好是儿科与青春期的分界。统计上要盯三点：一是按年龄或体重分层的剂量依据，儿童暴露量对体重更敏感，固定剂量往往站不住；二是主要终点取 BMI 百分位还是绝对 BMI，两者的效应量不可互换，直接决定样本量估算；三是安慰剂组的生长与青春期进展如何记录，否则分不清药物效应和发育本身。</p><div style="margin-top:8px"><a href="https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&amp;rss=currentIssue" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="med-3">展开解读 ▾</button>
       </article>
       <article class="item med">
-        <div class="hd"><span class="idx">04</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/17/sellas-blood-cancer-immunotherapy-succeeds-clinical-trial/?utm_campaign=rss" target="_blank">Sellas 血液肿瘤免疫疗法在试验中降低死亡风险</a></span></div>
-        <div class="stats"><span>2026-11-17</span></div>
-        <p class="sum">II 期数据显示总生存获益，公司称将据此推进注册路径；样本量与随访时长尚未披露。</p>
-        <p class="why">▎对你：OS 当主要终点时的样本量膨胀代价</p>
-        <div class="detail" id="med-4"><p style="margin:0">OS 作主要终点的代价是样本量和随访时间，血液肿瘤里尤其明显。这条没披露具体数字，但值得追它后续的 interim 设计：中途看过数据的话，alpha 怎么分配、最终分析门槛怎么调，才是这类试验真正的技术含量。可以当作「II 期数据推注册」这条路径的观察样本。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/17/sellas-blood-cancer-immunotherapy-succeeds-clinical-trial/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">04</span><span class="src NatMed">NatMed</span><span class="title"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">开源 agentic AI 科研协作者</a></span></div>
+        <div class="stats"><span>2026-11-16</span></div>
+        <p class="sum">Nature Medicine 刊出面向临床与生物医学发现的开源 agent 系统</p>
+        <p class="why">▎对你：agent 进科研流程，可复现性与责任归属怎么落地</p>
+        <div class="detail" id="med-4"><p style="margin:0">论文给的是一个开放式的 agentic co-scientist，把假设生成、文献与数据检索、分析执行串成可迭代的流程，重点在「开源」——方法可审、prompt 可查，才有可能被独立复现。对做评测的人它提出一个硬问题：怎么证明产出不是把检索到的既有结论重新包装？可行的判据是拿未发表的假说做盲测，并要求过程日志可回放。对统计岗，模型做探索、人负责假设检验与结论，这条边界不能因为流程自动化就模糊。</p><div style="margin-top:8px"><a href="https://www.nature.com/articles/s41591-026-04808-6" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="med-4">展开解读 ▾</button>
       </article>
       <article class="item med">
-        <div class="hd"><span class="idx">05</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/16/fda-approves-new-roche-breast-cancer-drug/?utm_campaign=rss" target="_blank">FDA 批准一款新的乳腺癌药物</a></span></div>
-        <div class="stats"><span>2026-11-16</span></div>
-        <p class="sum">为部分患者提供新选择；适应症范围与批准依据（ORR 还是 OS）需看原文。</p>
-        <p class="why">▎对你：加速批准与常规批准对统计设计的要求完全不同</p>
-        <div class="detail" id="med-5"><p style="margin:0">乳腺癌新药审批里，加速批准（基于 ORR/DoR）和常规批准（基于 OS/PFS）对设计的要求差很远：前者要承诺上市后确证性试验，后者要把 III 期终点做硬。看这条时值得追一下它走的是哪条路径——这决定了后面确证性试验长什么样，也决定你在类似项目上要准备多少样本量论证。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/16/fda-approves-new-roche-breast-cancer-drug/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
+        <div class="hd"><span class="idx">05</span><span class="src STAT">STAT</span><span class="title"><a href="https://www.statnews.com/2026/11/17/cms-ai-roadmap-and-news-from-hlth-health-tech/?utm_campaign=rss" target="_blank">CMS 发布 AI 路线图</a></span></div>
+        <div class="stats"><span>2026-11-17</span></div>
+        <p class="sum">美国 CMS 公布 AI 路线图，STAT 梳理要点并报道 HLTH 大会动向</p>
+        <p class="why">▎对你：支付方定调，决定 AI 工具进临床的经济前提</p>
+        <div class="detail" id="med-5"><p style="margin:0">CMS 这份路线图值得看的不是技术选型，而是它把 AI 放在医保体系的哪个位置：覆盖决定、质量指标，还是行政流程自动化。这决定医院和药企有没有动力把 AI 嵌进真实工作流——没有支付路径的工具最后都停在试点。对统计与编程侧的连带影响是数据口径：一旦 AI 输出要进质量报告或索赔数据，就需要可审计的版本记录、验证集说明和固定的评估口径，这跟临床数据标准化的工程问题同源。</p><div style="margin-top:8px"><a href="https://www.statnews.com/2026/11/17/cms-ai-roadmap-and-news-from-hlth-health-tech/?utm_campaign=rss" target="_blank">读原文 ↗</a></div></div>
         <button class="toggle" data-t="med-5">展开解读 ▾</button>
       </article>
     </section>

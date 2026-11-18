@@ -1,0 +1,903 @@
+{
+ "raw": {
+  "date": "2026-11-18",
+  "weekday": "周三",
+  "generated_at": "09:02",
+  "ai": {
+   "date": "2026-11-18",
+   "baseline_available": false,
+   "new_projects_30d": 50,
+   "health": "ok",
+   "prev_snapshot_date": "2026-11-17 20:35（不足 12 小时，忽略）",
+   "pool_size": 181,
+   "items": [
+    {
+     "full_name": "deepseek-ai/dsh-superagent-prototype",
+     "stars": 23674,
+     "desc": "Towards a More Autonomous Agent System",
+     "url": "https://github.com/deepseek-ai/dsh-superagent-prototype",
+     "lang": "TypeScript",
+     "topics": [],
+     "created": "2026-10-31",
+     "pushed": "2026-11-03",
+     "forks": 2920,
+     "archived": false,
+     "age_days": 18,
+     "delta": null
+    },
+    {
+     "full_name": "janestreet/agent_skills",
+     "stars": 9884,
+     "desc": "Agent skills",
+     "url": "https://github.com/janestreet/agent_skills",
+     "lang": "",
+     "topics": [],
+     "created": "2026-11-03",
+     "pushed": "2026-11-17",
+     "forks": 669,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "wangzan101/Mika",
+     "stars": 8969,
+     "desc": "An on-device AI agent for Android that operates apps and the web to get things done for you.",
+     "url": "https://github.com/wangzan101/Mika",
+     "lang": "Kotlin",
+     "topics": [
+      "accessibility",
+      "ai-agent",
+      "android",
+      "automation",
+      "jetpack-compose",
+      "kotlin"
+     ],
+     "created": "2026-10-29",
+     "pushed": "2026-11-17",
+     "forks": 2031,
+     "archived": false,
+     "age_days": 20,
+     "delta": null
+    },
+    {
+     "full_name": "KKKKhazix/agent-autoloop",
+     "stars": 5799,
+     "desc": "让你的命令行 Agent 在后台自己接活、自己跟进到底；平时不烦你，遇到拿不准的事才发卡片找你拍板。",
+     "url": "https://github.com/KKKKhazix/agent-autoloop",
+     "lang": "TypeScript",
+     "topics": [
+      "ai-agents",
+      "automation",
+      "claude-code",
+      "cli",
+      "codex",
+      "event-driven"
+     ],
+     "created": "2026-11-03",
+     "pushed": "2026-11-17",
+     "forks": 1067,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "expo/exact",
+     "stars": 4605,
+     "desc": "Write an app once. It runs natively on the web, macOS, iOS, and Linux, and an AI agent can build it, run it, see it, and test it on every one of them.",
+     "url": "https://github.com/expo/exact",
+     "lang": "Rust",
+     "topics": [
+      "ai-agents",
+      "appkit",
+      "coding-agents",
+      "cross-platform",
+      "css",
+      "ios"
+     ],
+     "created": "2026-11-02",
+     "pushed": "2026-11-18",
+     "forks": 122,
+     "archived": false,
+     "age_days": 16,
+     "delta": null
+    },
+    {
+     "full_name": "shanselman/gputaskman",
+     "stars": 3485,
+     "desc": "A GPU task manager for Windows, Linux, and WSL: per-process VRAM, GPU activity, and LLM model/KV-cache insights for NVIDIA, AMD, and Intel GPUs (plus Huawei Ascend on Linux).",
+     "url": "https://github.com/shanselman/gputaskman",
+     "lang": "Python",
+     "topics": [],
+     "created": "2026-11-03",
+     "pushed": "2026-11-17",
+     "forks": 172,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "sarpstar/cinecode",
+     "stars": 2666,
+     "desc": "Films made with code. Short films, long YouTube videos, ads, explainers and music videos: an AI coding agent writes the script, builds every frame in code, designs the sound and hands you an MP4.",
+     "url": "https://github.com/sarpstar/cinecode",
+     "lang": "Python",
+     "topics": [],
+     "created": "2026-11-03",
+     "pushed": "2026-11-12",
+     "forks": 456,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "caru-ini/stack-diagram",
+     "stars": 2587,
+     "desc": "Agent skill: describe your stack in a sentence, get an architecture diagram with official logos",
+     "url": "https://github.com/caru-ini/stack-diagram",
+     "lang": "TypeScript",
+     "topics": [
+      "agent-skills",
+      "architecture-diagram",
+      "claude-code",
+      "claude-skills",
+      "codex",
+      "diagram"
+     ],
+     "created": "2026-11-01",
+     "pushed": "2026-11-16",
+     "forks": 140,
+     "archived": false,
+     "age_days": 17,
+     "delta": null
+    },
+    {
+     "full_name": "DIYgod/pinky",
+     "stars": 2376,
+     "desc": "Let AI use your iPhone or Android phone, with you in the loop: any MCP agent from macOS, Windows or Linux, or Pinky itself, right on the phone.",
+     "url": "https://github.com/DIYgod/pinky",
+     "lang": "Go",
+     "topics": [
+      "ai-agent",
+      "android",
+      "claude-code",
+      "ios",
+      "iphone",
+      "mcp"
+     ],
+     "created": "2026-11-06",
+     "pushed": "2026-11-17",
+     "forks": 250,
+     "archived": false,
+     "age_days": 12,
+     "delta": null
+    },
+    {
+     "full_name": "N1nEmAn/sapper-v2",
+     "stars": 2326,
+     "desc": "The first fruit of the Nüwa tree — an autonomous AI pentest legion (634-team champion, 8h unattended, 1B tokens beat 4.5B). Not just a tool: evolvable by design. Grow your own fruit on the Nüwa Foundation (Create/Language/History).",
+     "url": "https://github.com/N1nEmAn/sapper-v2",
+     "lang": "Python",
+     "topics": [
+      "agentic-workflows",
+      "ai-agents",
+      "ai-security",
+      "autonomous-agents",
+      "claude-code",
+      "ctf"
+     ],
+     "created": "2026-10-30",
+     "pushed": "2026-11-11",
+     "forks": 1142,
+     "archived": false,
+     "age_days": 19,
+     "delta": null
+    },
+    {
+     "full_name": "Sandflow-ai/sand3d",
+     "stars": 2115,
+     "desc": "3D modeling in Python, built for LLMs.",
+     "url": "https://github.com/Sandflow-ai/sand3d",
+     "lang": "HTML",
+     "topics": [
+      "3d",
+      "blender",
+      "cad",
+      "llm",
+      "procedural-modeling",
+      "python"
+     ],
+     "created": "2026-11-03",
+     "pushed": "2026-11-17",
+     "forks": 232,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "FrigadeHQ/yogurt",
+     "stars": 2020,
+     "desc": "Private AI meeting notes that stay on your computer. A free, open-source alternative to Granola for Mac, Windows and Linux.",
+     "url": "https://github.com/FrigadeHQ/yogurt",
+     "lang": "TypeScript",
+     "topics": [
+      "ai-meeting-assistant",
+      "ai-notetaker",
+      "electron",
+      "granola-alternative",
+      "linux",
+      "llama-cpp"
+     ],
+     "created": "2026-11-10",
+     "pushed": "2026-11-18",
+     "forks": 126,
+     "archived": false,
+     "age_days": 8,
+     "delta": null
+    },
+    {
+     "full_name": "mdiri-ai/SoduWork",
+     "stars": 1706,
+     "desc": "The AI-native engine for teams and their agents. Multi-harness, multi-agent, self-hosted.",
+     "url": "https://github.com/mdiri-ai/SoduWork",
+     "lang": "JavaScript",
+     "topics": [
+      "agent-harness",
+      "agent-orchestration",
+      "agent-workflows",
+      "ai-agents",
+      "ai-workflows",
+      "anti-slop"
+     ],
+     "created": "2026-10-29",
+     "pushed": "2026-11-17",
+     "forks": 211,
+     "archived": false,
+     "age_days": 20,
+     "delta": null
+    },
+    {
+     "full_name": "agentes-chat/agentes-chat",
+     "stars": 1683,
+     "desc": "Open-source, self-hosted Slack alternative where your team and AI agents work together in channels and DMs. Agents run on Claude, ChatGPT/Codex, Gemini or Grok, with MCP tools, their own computer and browser, routines, memory and approvals. Web, desktop and phone apps. Docker Compose + Postgres. AGPL-3.0.",
+     "url": "https://github.com/agentes-chat/agentes-chat",
+     "lang": "TypeScript",
+     "topics": [
+      "agentic-ai",
+      "ai-agents",
+      "browser-automation",
+      "chat",
+      "claude",
+      "claude-code"
+     ],
+     "created": "2026-11-09",
+     "pushed": "2026-11-18",
+     "forks": 305,
+     "archived": false,
+     "age_days": 9,
+     "delta": null
+    },
+    {
+     "full_name": "voyager-so/vork",
+     "stars": 1621,
+     "desc": "Headless 3D and VFX engine for agents. Research preview.",
+     "url": "https://github.com/voyager-so/vork",
+     "lang": "Rust",
+     "topics": [
+      "3d",
+      "ai-agents",
+      "gpu",
+      "metal",
+      "ray-tracing",
+      "rendering"
+     ],
+     "created": "2026-11-05",
+     "pushed": "2026-11-17",
+     "forks": 134,
+     "archived": false,
+     "age_days": 13,
+     "delta": null
+    },
+    {
+     "full_name": "RunanywhereAI/trnrt",
+     "stars": 1613,
+     "desc": "The open LLM inference engine for AWS Trainium: NKI megakernels, 1M-token context, OpenAI-compatible API. By RunAnywhere.",
+     "url": "https://github.com/RunanywhereAI/trnrt",
+     "lang": "Python",
+     "topics": [
+      "aws",
+      "glm",
+      "inference",
+      "llm",
+      "llm-serving",
+      "megakernels"
+     ],
+     "created": "2026-10-30",
+     "pushed": "2026-11-11",
+     "forks": 20,
+     "archived": false,
+     "age_days": 19,
+     "delta": null
+    },
+    {
+     "full_name": "JosssphZhou/poki",
+     "stars": 1570,
+     "desc": "Poki uses your iPhone like you do. An open-source agent that sees your screen and taps, types, and swipes across any app on your real device. Runs locally, plugs right into Claude Code and any MCP agent.",
+     "url": "https://github.com/JosssphZhou/poki",
+     "lang": "Swift",
+     "topics": [
+      "ai-agents",
+      "automation",
+      "ios",
+      "iphone",
+      "mcp",
+      "model-context-protocol"
+     ],
+     "created": "2026-11-05",
+     "pushed": "2026-11-18",
+     "forks": 248,
+     "archived": false,
+     "age_days": 13,
+     "delta": null
+    },
+    {
+     "full_name": "erkamyaman/rust-anything",
+     "stars": 1320,
+     "desc": "Rewrite your whole app in Rust, one piece at a time, checked against the original's recorded behavior at every step. CLIs, HTTP servers and libraries in TypeScript, Python, C, Go, Ruby and Java.",
+     "url": "https://github.com/erkamyaman/rust-anything",
+     "lang": "Rust",
+     "topics": [
+      "agent-skills",
+      "claude-code",
+      "cli",
+      "code-migration",
+      "codex",
+      "ffi"
+     ],
+     "created": "2026-11-16",
+     "pushed": "2026-11-18",
+     "forks": 85,
+     "archived": false,
+     "age_days": 2,
+     "delta": null
+    },
+    {
+     "full_name": "RikiyaT/lm_understand-logs",
+     "stars": 1269,
+     "desc": "Complete logs of the experiments in the blog post 'LLMs can understand and write neural network weights'",
+     "url": "https://github.com/RikiyaT/lm_understand-logs",
+     "lang": "Python",
+     "topics": [],
+     "created": "2026-10-29",
+     "pushed": "2026-10-29",
+     "forks": 165,
+     "archived": false,
+     "age_days": 20,
+     "delta": null
+    },
+    {
+     "full_name": "andrew-babo/muse4ai",
+     "stars": 1162,
+     "desc": "Muse4AI — let your AI agent make the pictures and the videos. Local Windows bridge for Muse via REST, MCP, and OAuth.",
+     "url": "https://github.com/andrew-babo/muse4ai",
+     "lang": "TypeScript",
+     "topics": [],
+     "created": "2026-11-03",
+     "pushed": "2026-11-13",
+     "forks": 65,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "hyperionaidev/smolmaxxing",
+     "stars": 969,
+     "desc": "maxxing the ability to run different LLMs on the smallest devices possible",
+     "url": "https://github.com/hyperionaidev/smolmaxxing",
+     "lang": "C",
+     "topics": [
+      "edge-ai",
+      "llama-cpp",
+      "llama-cpp-alternative",
+      "llm",
+      "local-llm",
+      "local-llm-support"
+     ],
+     "created": "2026-11-04",
+     "pushed": "2026-11-13",
+     "forks": 45,
+     "archived": false,
+     "age_days": 14,
+     "delta": null
+    },
+    {
+     "full_name": "kubai087/kubai-icons",
+     "stars": 950,
+     "desc": "An agent skill that draws animated icons in one consistent style, for Claude Code, Codex and other coding agents. Comes with 2,600+ open-source icons for React, Vue and SVG, and a website to browse them.",
+     "url": "https://github.com/kubai087/kubai-icons",
+     "lang": "JavaScript",
+     "topics": [
+      "agent-skills",
+      "ai-agents",
+      "animated-icons",
+      "animation",
+      "claude",
+      "claude-skill"
+     ],
+     "created": "2026-11-03",
+     "pushed": "2026-11-17",
+     "forks": 41,
+     "archived": false,
+     "age_days": 15,
+     "delta": null
+    },
+    {
+     "full_name": "sybil-solutions/inference-optimisation-skill",
+     "stars": 927,
+     "desc": "Agent skill for hill-climbing local LLM serving speed (decode, speculative decoding, prefill, KV, startup, TTFT) on any hardware and quantization",
+     "url": "https://github.com/sybil-solutions/inference-optimisation-skill",
+     "lang": "Python",
+     "topics": [
+      "agent-skill",
+      "benchmarking",
+      "claude-code",
+      "inference",
+      "llm",
+      "speculative-decoding"
+     ],
+     "created": "2026-11-16",
+     "pushed": "2026-11-16",
+     "forks": 82,
+     "archived": false,
+     "age_days": 2,
+     "delta": null
+    },
+    {
+     "full_name": "simpsoka/zigzag",
+     "stars": 901,
+     "desc": "Free, open-source embroidery software for Mac and Windows. Turn SVG artwork into machine embroidery, edit stitches visually, and create designs with AI agents via MCP.",
+     "url": "https://github.com/simpsoka/zigzag",
+     "lang": "Rust",
+     "topics": [
+      "brother-skitch",
+      "embroidery",
+      "embroidery-digitizing",
+      "embroidery-software",
+      "machine-embroidery",
+      "macos"
+     ],
+     "created": "2026-10-30",
+     "pushed": "2026-11-17",
+     "forks": 53,
+     "archived": false,
+     "age_days": 19,
+     "delta": null
+    }
+   ]
+  },
+  "med": {
+   "health": "ok",
+   "sources_ok": [
+    "STAT News:20",
+    "NEJM:5",
+    "The Lancet:0",
+    "JAMA:40",
+    "Nature Medicine:3",
+    "Nature Biotechnology:1"
+   ],
+   "sources_fail": [],
+   "count": 28,
+   "items": [
+    {
+     "title": "STAT+: White House pulls nomination of Heidi Overton to lead FDA",
+     "link": "https://www.statnews.com/2026/11/17/heidi-overton-fda-commissioner-nomination-withdrawn/?utm_campaign=rss",
+     "desc": "BREAKING: The White House is pulling its nominee to be commissioner of the FDA, Heidi Overton.",
+     "published": "2026-11-18 00:44",
+     "ts": 1794962645.0,
+     "category": "Breaking News",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-01"
+    },
+    {
+     "title": "STAT+: Updated health data privacy rule sets standards for sharing records with apps",
+     "link": "https://www.statnews.com/2026/11/17/hipaa-privacy-rule-update-aims-to-improve-patient-access-to-records/?utm_campaign=rss",
+     "desc": "Federal health department has updated the HIPAA privacy rule with a focus on supporting patients’ access to their own medical records.",
+     "published": "2026-11-17 19:44",
+     "ts": 1794944654.0,
+     "category": "Health tech",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-02"
+    },
+    {
+     "title": "STAT+: GOP, MAHA leaders clash over FDA nominee’s record on vapes",
+     "link": "https://www.statnews.com/2026/11/17/heidi-overton-fda-commissioner-nomination-vote-vaping-controversy/?utm_campaign=rss",
+     "desc": "Heidi Overton is facing an uphill climb to become the next FDA commissioner. The latest challenge is her work on vaping.",
+     "published": "2026-11-17 18:14",
+     "ts": 1794939290.0,
+     "category": "Business",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-03"
+    },
+    {
+     "title": "STAT+: What to know about the new AI roadmap from CMS, and news from HLTH",
+     "link": "https://www.statnews.com/2026/11/17/cms-ai-roadmap-and-news-from-hlth-health-tech/?utm_campaign=rss",
+     "desc": "In this edition of STAT Health Tech: What you need to know about CMS' recently released AI roadmap, and highlights from HLTH.",
+     "published": "2026-11-17 17:49",
+     "ts": 1794937764.0,
+     "category": "Health tech",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-04"
+    },
+    {
+     "title": "STAT+: Flagship opens biotech-creation outpost in the U.K.",
+     "link": "https://www.statnews.com/2026/11/17/biotech-news-flagship-opens-biotech-creation-uk-outpost/?utm_campaign=rss",
+     "desc": "Flagship is putting up 100 million pounds to start “AI-native platform companies\" focused on human and planetary health in the U.K.:",
+     "published": "2026-11-17 17:05",
+     "ts": 1794935110.0,
+     "category": "Biotech",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-05"
+    },
+    {
+     "title": "U.S. loses measles elimination status, marking embarrassing stain on its public health record",
+     "link": "https://www.statnews.com/2026/11/17/us-loses-measles-elimination-status-public-health-victory-lost/?utm_campaign=rss",
+     "desc": "Measles is no longer considered eliminated in the U.S., a finding that was expected but that marks an embarrassing backslide in the country’s basic public health standing.",
+     "published": "2026-11-17 16:07",
+     "ts": 1794931641.0,
+     "category": "Health",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-06"
+    },
+    {
+     "title": "STAT+: ‘Medicare for More’ gains traction",
+     "link": "https://www.statnews.com/2026/11/17/democrats-new-health-policy-medicare-for-more-stephen-miller-embraces-maha/?utm_campaign=rss",
+     "desc": "Democrats coalesce around a new health care policy, and Trump's new chief of staff embraces MAHA.",
+     "published": "2026-11-17 15:27",
+     "ts": 1794929270.0,
+     "category": "Business",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-07"
+    },
+    {
+     "title": "STAT+: Pharmalittle: We’re reading about a Roche breast cancer pill, obesity drugs in children, and more",
+     "link": "https://www.statnews.com/pharmalot/2026/11/17/roche-breast-cancer-pill-obesity-drugs-in-children/?utm_campaign=rss",
+     "desc": "The FDA approved a breast cancer drug from Roche, teeing up the launch of what the company has said could become its top-selling product",
+     "published": "2026-11-17 14:25",
+     "ts": 1794925541.0,
+     "category": "Pharma",
+     "source": "STAT News",
+     "tag": "STAT",
+     "prio": 1,
+     "id": "med-08"
+    },
+    {
+     "title": "JAMA",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2856836",
+     "desc": "",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-09"
+    },
+    {
+     "title": "JAMA Editors' Summary Podcast October 23, 2026",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855986",
+     "desc": "Listen to the JAMA Editor’s Summary for an overview and discussion of the important articles appearing in JAMA.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-10"
+    },
+    {
+     "title": "New Guidelines Issued for Diagnosing Iron Deficiency",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855968",
+     "desc": "The American Society of Hematology (ASH) released updated guidelines for diagnosing iron deficiency, aiming to reduce missed diagnoses by standardizing ferritin thresholds across patient populations.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-11"
+    },
+    {
+     "title": "WHO Reports Highest Number of Cholera Deaths in Decades",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855967",
+     "desc": "The World Health Organization (WHO) found that deaths from cholera increased in 2025, despite a lower number of reported cases. The WHO also provided updated data on bacterial meningitis in Africa in 2025 as well as human plague.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-12"
+    },
+    {
+     "title": "Global Heart Failure Burden Increased Between 1990 and 2023",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855966",
+     "desc": "The global burden of heart failure increased sharply from 1990 to 2023, reaching an estimated 56 million cases worldwide, according to a cross-sectional study published in JAMA Cardiology.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-13"
+    },
+    {
+     "title": "ACC Releases Guidance for Managing Resistant Hypertension",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855965",
+     "desc": "The American College of Cardiology (ACC) released new guidance on blood pressure management for patients with resistant hypertension.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-14"
+    },
+    {
+     "title": "AAP Advises Against Raw Milk and Other Unpasteurized Dairy",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855964",
+     "desc": "The American Academy of Pediatrics (AAP) released an updated policy statement outlining the risks of unpasteurized dairy consumption.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-15"
+    },
+    {
+     "title": "WHO Publishes First Guidelines for Managing Obesity in Children",
+     "link": "https://jamanetwork.com/journals/jama/fullarticle/2855963",
+     "desc": "The World Health Organization (WHO) published its first guidelines on the management of obesity in children and adolescents.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "JAMA",
+     "tag": "JAMA",
+     "prio": 2,
+     "id": "med-16"
+    },
+    {
+     "title": "Generational gains in cognitive capacity and dementia incidence rates in Western countries",
+     "link": "https://www.nature.com/articles/s41591-026-04759-y",
+     "desc": "Nature Medicine, Published online: 17 November 2026; doi:10.1038/s41591-026-04759-y A study of longitudinal cohorts from Europe and the United States over 30 years showed that later-born generations benefit from higher cognitive capacity and memory stability, which may explain the trend of declining dementia incidence rates.",
+     "published": "2026-11-17 00:00",
+     "ts": 1794873600.0,
+     "category": "",
+     "source": "Nature Medicine",
+     "tag": "NatMed",
+     "prio": 2,
+     "id": "med-17"
+    },
+    {
+     "title": "Semaglutide for the Treatment of Obesity in Children 6 to <12 Years of Age",
+     "link": "https://www.nejm.org/doi/full/10.1056/NEJMoa2604058?af=R&rss=currentIssue",
+     "desc": "New England Journal of Medicine, Ahead of Print.",
+     "published": "2026-11-16 03:00",
+     "ts": 1794798000.0,
+     "category": "",
+     "source": "NEJM",
+     "tag": "NEJM",
+     "prio": 1,
+     "id": "med-18"
+    },
+    {
+     "title": "Addendum: A meta-analysis of GFR slope as a surrogate endpoint for kidney failure",
+     "link": "https://www.nature.com/articles/s41591-026-04798-5",
+     "desc": "Nature Medicine, Published online: 16 November 2026; doi:10.1038/s41591-026-04798-5 Addendum: A meta-analysis of GFR slope as a surrogate endpoint for kidney failure",
+     "published": "2026-11-16 00:00",
+     "ts": 1794787200.0,
+     "category": "",
+     "source": "Nature Medicine",
+     "tag": "NatMed",
+     "prio": 2,
+     "id": "med-19"
+    },
+    {
+     "title": "An open agentic AI co-scientist for clinical and biomedical discovery",
+     "link": "https://www.nature.com/articles/s41591-026-04808-6",
+     "desc": "Nature Medicine, Published online: 16 November 2026; doi:10.1038/s41591-026-04808-6 An open agentic AI co-scientist for clinical and biomedical discovery",
+     "published": "2026-11-16 00:00",
+     "ts": 1794787200.0,
+     "category": "",
+     "source": "Nature Medicine",
+     "tag": "NatMed",
+     "prio": 2,
+     "id": "med-20"
+    },
+    {
+     "title": "A CD7-targeted AAV variant enables efficient T and NK cell engineering in vivo",
+     "link": "https://www.nature.com/articles/s41587-026-03344-5",
+     "desc": "Nature Biotechnology, Published online: 16 November 2026; doi:10.1038/s41587-026-03344-5 Adeno-associated virus vectors targeted to CD7 enable T and NK cell engineering in vivo.",
+     "published": "2026-11-16 00:00",
+     "ts": 1794787200.0,
+     "category": "",
+     "source": "Nature Biotechnology",
+     "tag": "NatBiotech",
+     "prio": 3,
+     "id": "med-21"
+    },
+    {
+     "title": "Functional Fixed Dystonia of the Foot",
+     "link": "https://www.nejm.org/doi/full/10.1056/NEJMicm2608021?af=R&rss=currentIssue",
+     "desc": "New England Journal of Medicine, Ahead of Print.",
+     "published": "2026-11-14 12:30",
+     "ts": 1794659400.0,
+     "category": "",
+     "source": "NEJM",
+     "tag": "NEJM",
+     "prio": 1,
+     "id": "med-22"
+    },
+    {
+     "title": "What the Robot Still Can’t Do",
+     "link": "https://www.nejm.org/doi/full/10.1056/NEJMp2606894?af=R&rss=currentIssue",
+     "desc": "New England Journal of Medicine, Ahead of Print.",
+     "published": "2026-11-14 12:30",
+     "ts": 1794659400.0,
+     "category": "",
+     "source": "NEJM",
+     "tag": "NEJM",
+     "prio": 1,
+     "id": "med-23"
+    },
+    {
+     "title": "The Unexamined Subsidy — Rethinking Incentives for Outpatient Clinical Preceptors",
+     "link": "https://www.nejm.org/doi/full/10.1056/NEJMp2611160?af=R&rss=currentIssue",
+     "desc": "New England Journal of Medicine, Ahead of Print.",
+     "published": "2026-11-14 12:30",
+     "ts": 1794659400.0,
+     "category": "",
+     "source": "NEJM",
+     "tag": "NEJM",
+     "prio": 1,
+     "id": "med-24"
+    },
+    {
+     "title": "Reimagining Health Policy Research",
+     "link": "https://www.nejm.org/doi/full/10.1056/NEJMp2611665?af=R&rss=currentIssue",
+     "desc": "New England Journal of Medicine, Ahead of Print.",
+     "published": "2026-11-14 12:30",
+     "ts": 1794659400.0,
+     "category": "",
+     "source": "NEJM",
+     "tag": "NEJM",
+     "prio": 1,
+     "id": "med-25"
+    },
+    {
+     "title": "[Comment] Is chemotherapy still needed in all patients with mismatch repair-deficient advanced or recurrent endometrial cancer?",
+     "link": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)02199-9/fulltext?rss=yes",
+     "desc": "Around a quarter of advanced or recurrent endometrial carcinomas are mismatch repair deficient (dMMR).1 Addition of a PD-1 or PD-L1 inhibitor to carboplatin plus paclitaxel has transformed first-line treatment for this subgroup, with the RUBY,1 NRG-GY018,2 AtTEnd,3 and DUO-E4 trials reporting hazard ratios (HRs) for progression-free survival of 0·28–0·42 in their dMMR populations, and 4-year follow-up of RUBY suggests that some patients might be cured.5 However, every one of these trials retained chemotherapy.",
+     "published": "2026-11-14 00:00",
+     "ts": 1794614400.0,
+     "category": "",
+     "source": "The Lancet",
+     "tag": "Lancet",
+     "prio": 1,
+     "id": "med-26"
+    },
+    {
+     "title": "[Editorial] Health and poverty: lessons from China",
+     "link": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)02186-0/fulltext?rss=yes",
+     "desc": "The world has never been wealthier. Yet in 2025, an estimated 831 million people lived on less than US$3 per day. This stark disparity exposes a systemic failure to translate global prosperity into basic security and opportunity for all. As slowing economic growth and multiple crises, such as conflict and climate change, undermine the momentum of global poverty reduction, governments now face a pressing test: whether they will still find, reach, and protect those already furthest behind, or allow them to fall deeper into poverty.",
+     "published": "2026-10-29 00:01",
+     "ts": 1793232061.0,
+     "category": "",
+     "source": "The Lancet",
+     "tag": "Lancet",
+     "prio": 1,
+     "id": "med-27"
+    },
+    {
+     "title": "[Comment] Optimising late-line treatment administration in metastatic colorectal cancer: an even brighter SUNLIGHT",
+     "link": "https://www.thelancet.com/journals/lancet/article/PIIS0140-6736(26)02034-9/fulltext?rss=yes",
+     "desc": "Offering late-line systemic therapy to patients with chemo-refractory metastatic colorectal cancer demands a careful estimation of the balance between the expected treatment benefit and its potential impact on quality of life, including adverse events, hospital visits, and psychosocial consequences.1 In such a comprehensive and individualised assessment of patients’ general conditions, usually summarised by Eastern Cooperative Oncology Group (ECOG) performance status, the cumulative burden of disease-related symptoms and previous treatment-related adverse events, together with the potential decay of organ functional reserve, cannot be neglected.",
+     "published": "2026-10-24 12:45",
+     "ts": 1792845901.0,
+     "category": "",
+     "source": "The Lancet",
+     "tag": "Lancet",
+     "prio": 1,
+     "id": "med-28"
+    }
+   ]
+  }
+ },
+ "annotations": {
+  "ai_headline": "agent 从能跑转向能验收：自主循环、行为对照、显存可观测",
+  "med_headline": "FDA 高层空缺延长，AI 支付路线图与儿科肥胖证据同周落地",
+  "ai_picks": [
+   {
+    "full_name": "deepseek-ai/dsh-superagent-prototype",
+    "what": "DeepSeek 的自主 agent 系统原型，18 天冲到 2.3 万星",
+    "why": "看它怎么拆任务、自检、失败重规划——agent loop 骨架参考",
+    "detail": "定位是研究原型而非产品，真正值得读的是它把「更自主」拆成了三件可检验的事：任务分解、工具调用后的自检、失败后的重规划。建议读法：先看 README 的架构与 roadmap，再看 loop 的状态机实现，最后看它如何判定「这个任务算完成了」。对做评测的人，最后一点是关键——自主性越强，越需要一个外部可验证的完成判据，否则无法区分真做完和自认为做完。仓库只有 18 天，接口会变，别当稳定依赖。"
+   },
+   {
+    "full_name": "KKKKhazix/agent-autoloop",
+    "what": "让命令行 agent 在后台自己接活跟进，只在拿不准时发卡片找人拍板",
+    "why": "人机交接点显式化——正好是 agent 评测里最难量化的部分",
+    "detail": "事件驱动加人类审批卡片的组合：agent 平时在后台跑，遇到需要判断的节点才把决策打包成一张卡片推给人，避免每一步都来问。技术上是贴着 claude-code / codex 这类 CLI agent 做外挂循环。可借鉴的做法是把「需要人」的时机收敛成一个显式的待决队列，而不是散落在日志里等人翻。这跟长时间无人值守的统计编程流水线是同一类问题：跑数据、生成 TFL、异常挂起，都要有个地方集中拍板。"
+   },
+   {
+    "full_name": "RunanywhereAI/trnrt",
+    "what": "Trainium 上的开源 LLM 推理引擎，兼容 OpenAI API",
+    "why": "换硬件不换客户端——评测脚本只认 base_url 和参数",
+    "detail": "主打手写 NKI megakernel、宣称支持百万级 token 上下文，对外暴露 OpenAI 兼容接口。对做评测的实际意义在这层兼容性：同一套 prompt 与评分脚本可平移到不同后端，把「模型能力」和「服务实现」解耦，避免结论被某个框架的默认采样参数污染。Trainium 是 AWS 自研芯片，供给与成本曲线不同于 GPU，所以更要看它在长上下文和并发下是否稳，而不只是能跑通 demo。"
+   },
+   {
+    "full_name": "shanselman/gputaskman",
+    "what": "GPU 任务管理器：WSL 下每进程显存与 KV cache",
+    "why": "本机跑模型的显存账，终于有进程级的答案",
+    "detail": "覆盖 NVIDIA、AMD、Intel，Linux 上还支持昇腾；除每进程 VRAM 与利用率，还专门给出 LLM 的模型占用与 KV cache 洞察。对 Windows 加 WSL 双栈、模型和桌面程序抢同一张卡的环境，最缺的就是「这块显存是谁吃的」。实用价值在排查 OOM 和反推上下文上限：KV cache 随上下文增长，知道它占多少才能判断 max_tokens 还能开多长，而不是靠试错。"
+   },
+   {
+    "full_name": "erkamyaman/rust-anything",
+    "what": "逐块把应用重写成 Rust，每步对照原版录制行为",
+    "why": "用可重放的行为当裁判——和你拿 CORE 规则当裁判同构",
+    "detail": "两天新仓，思路是「行为等价」而非「代码相似」：先把原实现的输入输出录下来当基线，每迁移一个模块就跑一遍对照，不一致就停下修，而不是靠人读 diff 判断像不像。这跟你给临床统计 LLM 找客观裁判是同一套方法论——先固定可执行的判据，再让模型自由发挥。可移用的具体做法：把「正确」沉淀成可重放的用例集，并盯住用例覆盖面，因为覆盖不到的地方，迁移和评测都会假通过。"
+   }
+  ],
+  "med_picks": [
+   {
+    "id": "med-01",
+    "title_zh": "白宫撤回 FDA 局长提名",
+    "summary": "原提名人 Overton 的提名被撤回，FDA 高层空缺继续延长",
+    "why": "审批节奏受人手牵制——递交时间表要留政策缓冲",
+    "detail": "白宫在推进受阻后撤回 Overton 的 FDA 局长提名，此前她已因电子烟相关经历承压。对制药端的传导不看人只看流程：局长缺位时常规审评照旧，但涉及跨部门优先级、加速通道认定、以及需要高层背书的争议决定通常会变慢。做递交计划时把监管不确定性当风险项而不是异常项——PDUFA 日期是承诺，但沟通节奏不是，中期分析和资料补交的窗口都要留余量。"
+   },
+   {
+    "id": "med-08",
+    "title_zh": "FDA 批准罗氏乳腺癌口服药",
+    "summary": "罗氏一款乳腺癌口服药获 FDA 批准，公司称可能成为最畅销产品",
+    "why": "口服剂型进一线，依从性与 PFS 读数会被重新追问",
+    "detail": "Pharmalittle 当天最实的一条：罗氏乳腺癌口服药拿到 FDA 批准，公司此前把它定位成潜在最畅销产品。口服与静脉的差别不止给药途径，它直接改写三期设计：若走非劣效，界值要事先论证；开放标签下 PFS 的评估偏倚要靠盲态阅片兜住；交叉用药会稀释后续 OS 的读数。患者报告结局和依从性因此从次要指标升为差异化证据。同条目还提到儿童肥胖用药，与 NEJM 那篇儿科试验是同一方向。"
+   },
+   {
+    "id": "med-18",
+    "title_zh": "司美格鲁肽治疗 6 至 12 岁以下儿童肥胖",
+    "summary": "NEJM 在线发表司美格鲁肽用于 6 至 12 岁以下儿童肥胖的研究",
+    "why": "低龄段的剂量-暴露关系，比成人多一层儿科外推问题",
+    "detail": "NEJM 的 ahead-of-print 试验，人群卡在 6 岁到 12 岁以下，正好是儿科与青春期的分界。统计上要盯三点：一是按年龄或体重分层的剂量依据，儿童暴露量对体重更敏感，固定剂量往往站不住；二是主要终点取 BMI 百分位还是绝对 BMI，两者的效应量不可互换，直接决定样本量估算；三是安慰剂组的生长与青春期进展如何记录，否则分不清药物效应和发育本身。"
+   },
+   {
+    "id": "med-20",
+    "title_zh": "开源 agentic AI 科研协作者",
+    "summary": "Nature Medicine 刊出面向临床与生物医学发现的开源 agent 系统",
+    "why": "agent 进科研流程，可复现性与责任归属怎么落地",
+    "detail": "论文给的是一个开放式的 agentic co-scientist，把假设生成、文献与数据检索、分析执行串成可迭代的流程，重点在「开源」——方法可审、prompt 可查，才有可能被独立复现。对做评测的人它提出一个硬问题：怎么证明产出不是把检索到的既有结论重新包装？可行的判据是拿未发表的假说做盲测，并要求过程日志可回放。对统计岗，模型做探索、人负责假设检验与结论，这条边界不能因为流程自动化就模糊。"
+   },
+   {
+    "id": "med-04",
+    "title_zh": "CMS 发布 AI 路线图",
+    "summary": "美国 CMS 公布 AI 路线图，STAT 梳理要点并报道 HLTH 大会动向",
+    "why": "支付方定调，决定 AI 工具进临床的经济前提",
+    "detail": "CMS 这份路线图值得看的不是技术选型，而是它把 AI 放在医保体系的哪个位置：覆盖决定、质量指标，还是行政流程自动化。这决定医院和药企有没有动力把 AI 嵌进真实工作流——没有支付路径的工具最后都停在试点。对统计与编程侧的连带影响是数据口径：一旦 AI 输出要进质量报告或索赔数据，就需要可审计的版本记录、验证集说明和固定的评估口径，这跟临床数据标准化的工程问题同源。"
+   }
+  ]
+ }
+}
