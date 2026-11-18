@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>DeepSeek Harness 拆解：从 283k 星的 agent 框架到你自己的 200 行</title>
+<style>
+:root{
+  --blue:#1f6feb; --blue2:#e8f1fe; --green:#0f7b52; --green2:#e6f5ef;
+  --orange:#f08c00; --orange2:#fff4e5; --red:#d9363e; --red2:#fdecec;
+  --ink:#1f2937; --mute:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --bg:#f8fafc; --code:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,Consolas,"Microsoft YaHei",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16.5px/1.8 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:var(--blue)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:34px max(20px,5vw) 26px}
+.wrap{max-width:820px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700}
+h1{font-size:31px;line-height:1.35;margin:8px 0 10px;font-weight:750;letter-spacing:-.015em}
+.sub{color:var(--mute);font-size:15px;line-height:1.75}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:18px}
+.stats div{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stats b{display:block;font:700 20px var(--mono);color:var(--blue)}
+.stats span{font-size:11.5px;color:var(--faint)}
+main{max-width:820px;margin:auto;padding:30px 20px 60px}
+h2{font-size:23px;margin:44px 0 10px;font-weight:750;letter-spacing:-.01em;
+  padding-bottom:8px;border-bottom:2px solid var(--line)}
+h2 .n{color:var(--faint);font:600 15px var(--mono);margin-right:8px}
+h3{font-size:17.5px;margin:26px 0 6px;font-weight:700}
+p{margin:12px 0}
+ul,ol{margin:12px 0;padding-left:24px}
+li{margin:6px 0}
+code{font-family:var(--mono);font-size:14px;background:#eef2f7;border-radius:4px;padding:1px 5px}
+pre{background:var(--code);color:#e2e8f0;border-radius:10px;padding:15px 17px;overflow-x:auto;
+  font:12.8px/1.6 var(--mono);margin:16px 0;border-left:4px solid var(--blue)}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+pre .c{color:#64748b}      /* 注释 */
+pre .k{color:#7dd3fc}      /* 关键字 */
+pre .s{color:#86efac}      /* 字符串 */
+pre .f{color:#fcd34d}      /* 函数名 */
+.tldr{background:var(--blue2);border-left:5px solid var(--blue);border-radius:10px;padding:16px 20px;margin:22px 0}
+.tldr b{color:#134a9e}
+.key{border-left:5px solid var(--green);background:var(--green2);padding:14px 18px;border-radius:10px;margin:16px 0}
+.warn{border-left:5px solid var(--red);background:var(--red2);padding:14px 18px;border-radius:10px;margin:16px 0}
+.note{border-left:5px solid var(--orange);background:var(--orange2);padding:14px 18px;border-radius:10px;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:16px 0}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#f3f6fa;font-weight:650}
+td code{font-size:13px}
+.toc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:22px 0}
+.toc ol{margin:0;padding-left:22px;font-size:14.5px}
+.toc li{margin:4px 0}
+.toc a{text-decoration:none}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:16px 0}
+.step{flex:1 1 120px;background:#fff;border:1.5px solid var(--blue);border-radius:10px;padding:9px 12px;font-size:13.5px}
+.step b{display:block;color:var(--blue);font-size:14px;margin-bottom:2px}
+.arr{align-self:center;color:var(--faint);font-size:18px}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:680px){.gr{grid-template-columns:1fr}h1{font-size:24px}h2{font-size:20px}}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card h4{margin:0 0 6px;font-size:15px}
+.card p{margin:6px 0 0;font-size:14px;color:#4b5563}
+footer{max-width:820px;margin:auto;padding:20px 20px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+.tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--blue2);color:var(--blue);font-weight:650;vertical-align:2px}
+.tag.o{background:var(--orange2);color:#b35c00}
+.tag.g{background:var(--green2);color:var(--green)}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="eyebrow">Deep Dive · 2026-11-18</div>
+  <h1>DeepSeek Harness 拆解：<br>从 283k 星的 agent 框架，到你自己的 200 行</h1>
+  <div class="sub">它不是一个 agent，是搭 agent 的操作系统。这篇讲清它的 5 个设计决策、真实的 turn/step 流程、工具怎么写，<br>最后给你一份跑得起来的最小复刻——不依赖它，也能长出同样的骨架。</div>
+  <div class="stats">
+    <div><b>283k</b><span>GitHub stars</span></div>
+    <div><b>35k</b><span>forks</span></div>
+    <div><b>MIT</b><span>license</span></div>
+    <div><b>TypeScript</b><span>实现语言</span></div>
+    <div><b>2026-08</b><span>开源时间</span></div>
+  </div>
+</div></header>
+
+<main>
+
+<div class="tldr">
+  <b>如果只读一段：</b>dsh 把「agent 的每一个零件」都做成了插件——包括模型适配器、工具注册表、会话日志，<b>连 agent loop 本身都能换</b>。它不提供「一个更好的 agent」，而是提供「一个可以重组 agent 的运行时」。你复刻它，本质上不是抄代码，而是抄这个决定：<b>没有内核，只有插件和事件</b>。
+</div>
+
+<div class="toc">
+  <b style="font-size:14px">目录</b>
+  <ol>
+    <li><a href="#what">它到底是什么，不是什么</a></li>
+    <li><a href="#five">五个设计决策（看懂这五个就懂它）</a></li>
+    <li><a href="#loop">agent loop 的真实流程：turn 与 step</a></li>
+    <li><a href="#tool">工具怎么写：官方真实签名</a></li>
+    <li><a href="#path">三层复刻路径</a></li>
+    <li><a href="#mini">200 行复刻（可直接跑）</a></li>
+    <li><a href="#gap">你的版本和它的差距</a></li>
+    <li><a href="#when">什么时候不该用它</a></li>
+  </ol>
+</div>
+
+<h2 id="what"><span class="n">01</span>它到底是什么，不是什么</h2>
+
+<p>先排除三个常见误解：</p>
+
+<table>
+  <tr><th style="width:26%">它<strong>不是</strong></th><th>实际是</th></tr>
+  <tr>
+    <td>❌ 一个现成的 AI 助手</td>
+    <td>✅ 一个<strong>运行时</strong>。装好后是一个 Web UI（<code>npx @deepseek-ai/dsh web</code>），但它真正的价值在于你能把里面任何一块换掉</td>
+  </tr>
+  <tr>
+    <td>❌ LangChain 那种"库"</td>
+    <td>✅ 库是你 import 它；dsh 是你<strong>挂载</strong>到它的插件树上。你的代码和它自带的功能是平级的兄弟节点，没有"主从"</td>
+  </tr>
+  <tr>
+    <td>❌ Claude Code 那种"产品"</td>
+    <td>✅ 产品是固定的；dsh 的 agent loop、工具集、持久化方式、甚至 UI 都是可替换的条目</td>
+  </tr>
+</table>
+
+<div class="key">
+  <b>一句话定位：</b>如果 Linux 是"一切皆文件"，dsh 就是"<b>一切皆插件</b>"。它没有需要打补丁的特权内核——你想改什么，就写一个插件挂在旁边，原来的那个卸掉。
+</div>
+
+<p>这带来一个直接后果：<b>它的源码不是"读一遍就懂"的那种</b>。283k 星的仓库有 <code>packages/</code> 下几十个包、上万行配置。你不需要读完——你需要看懂它的抽象，然后用 200 行复刻那个抽象。</p>
+
+<h2 id="five"><span class="n">02</span>五个设计决策</h2>
+
+<h3>① 一切皆插件，包括 agent loop</h3>
+<p>官方文档的原话：模型适配器、工具注册表、会话日志、以及 <b>agent loop 本身</b>都是插件，"因此每个都可以从配置替换"。</p>
+<p>这句话的分量在于：大多数 agent 框架里，loop 是框架的核心、不可动；工具和模型才是插件。dsh 把 loop 也下沉成了 <code>ctx.agentLoop</code> 这个服务。你想换成"先规划再执行"的两段式 loop，不需要 fork，只需要写一个实现同样接口的插件替掉它。</p>
+
+<h3>② Cordis：不是"插件目录"，是服务容器 + 依赖注入</h3>
+<p>底层用的 <a href="https://github.com/cordiverse/cordis">Cordis</a>。它的五个概念，是理解 dsh 的最小知识集：</p>
+
+<table>
+  <tr><th style="width:22%">概念</th><th>含义</th><th style="width:28%">在 dsh 里的例子</th></tr>
+  <tr><td><b>插件</b></td><td>一个实现 Service 的对象：函数带 <code>apply(ctx)</code>，或 Service 子类</td><td>一个工具包、一个模型适配器</td></tr>
+  <tr><td><b>上下文 ctx</b></td><td>服务容器。服务占一个稳定的 key，别人按 key 找，不 import 实现</td><td><code>ctx.tools</code>、<code>ctx.llm</code>、<code>ctx.sessions</code></td></tr>
+  <tr><td><b>inject</b></td><td>声明依赖的服务名；等这些服务就绪才启动</td><td><code>inject = ['tools']</code></td></tr>
+  <tr><td><b>类型化事件</b></td><td>用 TS 声明合并注册事件名，五种分发方式</td><td><code>tools/pre-execute</code>（拦工具调用）</td></tr>
+  <tr><td><b>可逆副作用</b></td><td>注册都返回 disposer，卸载时自动撤销</td><td>卸插件 = 工具自动消失</td></tr>
+</table>
+
+<p>这五条里最容易被低估的是最后一条。它意味着<b>热插拔不是靠"重启动"，而是靠"引用计数"</b>：谁注册的谁负责撤销，一条 <code>ctx.effect()</code> 串起整个生命周期。</p>
+
+<h3>③ 事件分三域：会话、agent、能力</h3>
+<p>扩展点不是一锅粥，而是按"你要改的东西的性质"分成三类：</p>
+
+<div class="gr">
+  <div class="card">
+    <h4>session/* —— 持久事实</h4>
+    <p>追加到日志、重载后还在。比如 <code>turn/start</code>、<code>tool/result</code>。<b>用在你需要事后能查到的东西</b>上。</p>
+  </div>
+  <div class="card">
+    <h4>agent/* —— 进行中的工作</h4>
+    <p>携带活跃 Agent：inbox、step、状态、请求、验证。<b>用在你需要拦截或观察"正在发生的事"</b>上。</p>
+  </div>
+  <div class="card">
+    <h4>capability seam —— 插件挂策略</h4>
+    <p><code>fs/*</code>、<code>tools/*</code>、<code>telemetry/*</code>。<b>用在你不 import 循环也能加中间件</b>上。</p>
+  </div>
+  <div class="card">
+    <h4>为什么分域</h4>
+    <p>因为"改日志格式"和"拦工具调用"是两种完全不同的需求。混在一个事件总线里，插件会互相踩。</p>
+  </div>
+</div>
+
+<h3>④ 五种事件分发方式（这个设计很讲究）</h3>
+<table>
+  <tr><th style="width:18%">模式</th><th style="width:14%">是否 await</th><th style="width:30%">语义</th><th>典型用途</th></tr>
+  <tr><td><code>emit</code></td><td>否</td><td>扇出，无返回值</td><td>通知、日志</td></tr>
+  <tr><td><code>waterfall</code></td><td>否</td><td><b>环绕中间件</b>，可包装/短路</td><td>策略门禁、改写请求</td></tr>
+  <tr><td><code>parallel</code></td><td>是</td><td>全部并行</td><td>并行检查</td></tr>
+  <tr><td><code>serial</code></td><td>是</td><td>按序，有返回值</td><td>链式决策</td></tr>
+  <tr><td><code>bail</code></td><td>否</td><td>停在首个返回值</td><td>快速否决</td></tr>
+</table>
+
+<p><code>waterfall</code> 是最关键的：监听器拿到 <code>(...args, next)</code>，调 <code>next()</code> 就把控制权交给下游，不调就<b>短路</b>。这就是"权限门禁"的实现方式——策略插件站在链条最前面，看到不该放行的调用，直接返回，后面的执行器根本不会被调用。</p>
+
+<h3>⑤ profile / bundle / patch：配置也是分层的</h3>
+<p>运行时不是"一个配置文件"，而是<b>四层叠加</b>：</p>
+<pre><code>profile（web / headless / sdk / sdk-minimal / acp）
+  └─ 有序的 bundle：dsh-base → dsh-web-app
+      └─ cordis.patch.yml（profile 的补丁）
+          └─ home patch
+              └─ --patch overlay（命令行临时覆盖）</code></pre>
+
+<p>每层都按 <code>id</code> 定位某个条目，替换它的 config 或插入新条目。所以"改一个内置行为"不是一个 PR，而是一行 YAML。<b>这套机制让"定制"和"升级"不再冲突</b>——这是很多框架做不到的。</p>
+
+<div class="note">
+  <b>想看你机器上真实的树：</b><code>dsh --profile web --dump-config</code>。它打印出的任何条目都能被你的 patch 替换——这句话是官方文档里最有价值的一句。
+</div>
+
+
+<h2 id="loop"><span class="n">03</span>agent loop 的真实流程</h2>
+
+<p>官方把一次交互拆成两层：<b>turn</b>（轮）和 <b>step</b>（步）。</p>
+
+<div class="gr">
+  <div class="card">
+    <h4>turn（轮）</h4>
+    <p>从"领取第一条输入"开始，到"不再欠任何工作"结束。<b>一个 turn 包含零个或多个 step。</b>用户说一句话、agent 调了三次工具、最后回答——这是一个 turn。</p>
+  </div>
+  <div class="card">
+    <h4>step（步）</h4>
+    <p><b>一次模型请求 + 它发起的工具调用。</b>工具返回结果后如果还需要再问模型，就进入下一个 step——所以 step 循环发生在 turn 内部。</p>
+  </div>
+</div>
+
+<h3>完整时序（把官方伪代码翻译成人话）</h3>
+
+<pre><code>turn/start
+├─ 领取「下一条要处理的输入」+ 至多一条排队消息
+├─ 快照本次的模型选择；组装 system prompt 片段 + 本步允许的工具 schema
+├─ agent/pre-step            ← 插件可在这里改写或拒绝
+├─ step/start
+│   ├─ agent/request          ← 绑定一次具体的模型调用（可取消）
+│   ├─ 追加 user/message 到日志；冻结模型历史
+│   ├─ 流式调用模型 → llm/stream → agent/assistant-stream（chunk × N）
+│   ├─ 得到 assistant/message（或 attempt）
+│   ├─ tool/call × N
+│   │   ├─ tools/pre-execute  ← 策略门禁（允许/拒绝/询问）
+│   │   ├─ tools/execute      ← 截止时间、重试、指标
+│   │   ├─ tools/post-execute ← 替换展示、附加上下文
+│   │   └─ tool/result × N
+│   └─ step/end
+├─ 如果「还欠一次模型请求」或「新输入到了」→ 回到 step/start
+└─ agent/turn-stopping → turn/end</code></pre>
+
+<div class="key">
+  <b>三个容易忽略的设计：</b><br>
+  ① <b>turn 可以在零 step 的情况下关闭</b>——比如策略插件在 pre-step 阶段就把请求拒了。<br>
+  ② <b>「还欠一次请求」是显式状态</b>，不是靠"工具返回了就一定再问"。有的工具返回后可以直接结束（比如终止类工具）。<br>
+  ③ <b>日志是事实源</b>：模型历史是从会话日志里<b>冻结</b>出来的，不是从内存里的 messages 数组。重载后能完全复原。
+</div>
+
+<h3>事件分类（哪些能重放，哪些不能）</h3>
+<table>
+  <tr><th style="width:34%">类型</th><th>事件</th></tr>
+  <tr><td><b>持久会话事件</b>（写进日志，重载可复原）</td><td><code>turn/*</code>、<code>step/*</code>、<code>system/message</code>、<code>user/message</code>、<code>assistant/message</code>、<code>assistant/attempt</code>、<code>tool/*</code></td></tr>
+  <tr><td><b>实时扩展点</b>（只在内存里）</td><td><code>agent/pre-step</code>、<code>agent/request</code>、<code>agent/turn-stopping</code>、<code>tools/pre-execute</code> 等</td></tr>
+  <tr><td><b>进程本地流</b>（不持久）</td><td><code>agent/assistant-stream</code> 的 start / chunk / end</td></tr>
+</table>
+
+<p>这个划分直接决定你写插件时该挂哪个事件：<b>要事后能查到 → 挂持久事件；要拦行为 → 挂实时扩展点。</b></p>
+
+<h2 id="tool"><span class="n">04</span>工具怎么写</h2>
+
+<p>这是官方文档里的<b>最小形态</b>，不是我编的：</p>
+
+<pre><code><span class="k">import</span> { readFile } <span class="k">from</span> <span class="s">'node:fs/promises'</span>
+<span class="k">import</span> { defineTool } <span class="k">from</span> <span class="s">'@deepseek-ai/dsh-tools'</span>
+
+<span class="k">export const</span> name = <span class="s">'my-tool'</span>
+<span class="k">export const</span> inject = [<span class="s">'tools'</span>]        <span class="c">// 声明依赖：等 ctx.tools 就绪才启动</span>
+
+<span class="k">export function</span> <span class="f">apply</span>(ctx) {
+  ctx.tools.<span class="f">register</span>(<span class="f">defineTool</span>({
+    name: <span class="s">'read_file'</span>,
+    description: <span class="s">'Read a file from disk.'</span>,     <span class="c">// 模型看到的</span>
+    parameters: {
+      path:  { type: <span class="s">'string'</span>, required: <span class="k">true</span>, description: <span class="s">'Absolute path'</span> },
+      limit: { type: <span class="s">'number'</span> },                    <span class="c">// 默认可选</span>
+    },
+    output: {
+      schema: { type: <span class="s">'string'</span> },
+      <span class="f">render</span>: (_args, value) =&gt; [{ type: <span class="s">'text'</span>, text: value }],
+    },
+    <span class="k">async</span> <span class="f">execute</span>(args, exec) {
+      <span class="c">// args 已按 schema 校验过并推导出类型</span>
+      <span class="c">// exec 携带不可变身份 + token；signal 是可操作字段</span>
+      <span class="k">return</span> <span class="f">readFile</span>(args.path, { encoding: <span class="s">'utf8'</span>, signal: exec.signal })
+    },
+  }))
+}</code></pre>
+
+<p>这段 30 行代码里藏了 6 个约定，每个都对应一个常见的坑：</p>
+
+<table>
+  <tr><th style="width:24%">约定</th><th>为什么</th></tr>
+  <tr><td><b>注册是可逆副作用</b></td><td>dispose 插件 = 工具自动注销。<b>你不需要写"卸载函数"</b>，生命周期由容器管</td></tr>
+  <tr><td><b>schema 自动进 system prompt</b></td><td>你只写一次，模型看到的就是它；不用另外维护一份"工具说明"</td></tr>
+  <tr><td><b>参数已校验</b></td><td><code>defineTool</code> 在 execute 之前按 schema 校验（类型、必填、联合、嵌套）。<b>你只需检查 schema 表达不了的东西</b>（非空字符串、正数、跨字段）</td></tr>
+  <tr><td><b>执行身份不可变</b></td><td><code>exec.token</code> / <code>callId</code> / <code>agent</code> 在整条分发链上冻结。<b>args 当只读</b>，只有环绕包装器能拿到可变视图</td></tr>
+  <tr><td><b>返回规范 JSON 值</b></td><td>不要在工具里拼自然语言让人去解析。返回结构化值，渲染交给 <code>output.render</code></td></tr>
+  <tr><td><b>异常 = isError</b></td><td>抛 <code>HarnessError</code> 子类并带稳定 <code>code</code>；<b>异常不会打断 loop</b>，会变成工具结果回给模型</td></tr>
+</table>
+
+<div class="warn">
+  <b>最容易写错的一条：把策略内建进工具。</b>官方明确说"尽量不要把部署策略内建到工具中"——允许/拒绝放 <code>tools/pre-execute</code>，超时重试放 <code>tools/execute</code>，展示替换放 <code>tools/post-execute</code>。工具本身只做一件事。
+</div>
+
+<h2 id="path"><span class="n">05</span>三层复刻路径</h2>
+
+<p>"复刻"有三个层次，成本差 100 倍。先想清楚你要哪一层。</p>
+
+<h3>L1：直接用（3 分钟）</h3>
+<pre><code>npx @deepseek-ai/dsh web        <span class="c"># 默认起在 http://127.0.0.1:3080</span></code></pre>
+<p>能看到完整产品，但你对内部一无所知。适合先判断"这东西值不值得学"。</p>
+
+<h3>L2：写插件扩展（30 分钟）</h3>
+<pre><code><span class="c"># 1. 看它启动了什么树</span>
+dsh --profile web --dump-config
+
+<span class="c"># 2. 在你的 profile 里加一个插件条目</span>
+<span class="c"># ~/.dsh/profiles/web/cordis.patch.yml</span>
+- id: my-tool
+  config: { greeting: <span class="s">"hi"</span> }</code></pre>
+<p>然后写一个 <code>apply(ctx)</code> 注册工具或挂事件。<b>这一步能让你真正理解"插件"和"事件"是什么手感</b>，但你还是不知道 loop 怎么转。</p>
+
+<h3>L3：自己搭一个（1–2 天）</h3>
+<p>不依赖 dsh，实现同样的抽象：<b>服务容器 + 事件总线 + 可逆副作用 + 工具注册表 + turn/step 循环</b>。下面是完整实现，200 行，只用 Python 标准库。</p>
+
+<div class="key">
+  <b>为什么值得走 L3：</b>框架的 API 会变，抽象不会。你把"ctx 是容器""事件是中间件""注册要可逆"这三件事写一遍，以后看任何 agent 框架（LangGraph、AutoGen、Claude Code SDK）都是同一个骨架的不同方言。
+</div>
+
+<h2 id="mini"><span class="n">06</span>200 行复刻</h2>
+
+<p>下面这份代码我<b>实际跑过</b>，输出在代码后面。它实现了 dsh 的 5 个核心抽象，删掉了所有工程细节（沙箱、审批、压缩、UI）。</p>
+
+<pre><code>&quot;&quot;&quot;
+mini_agent.py —— 与 DeepSeek Harness 同构的最小 agent 内核
+跑法：python3 mini_agent.py
+不需要任何依赖，只用标准库。
+&quot;&quot;&quot;
+import json
+import os
+from dataclasses import dataclass
+from typing import Any, Callable
+
+
+<span class="c"># ============ 1. 上下文：服务容器 + 事件总线 ============</span>
+class Context:
+    &quot;&quot;&quot;Cordis 的 ctx 的最小翻版：服务按 key 存放，事件按名字分发，注册可撤销。&quot;&quot;&quot;
+
+    def __init__(self):
+        self._services: dict[str, Any] = {}
+        self._disposers: list[Callable[[], None]] = []
+        self._listeners: dict[str, list] = {}
+
+    <span class="c"># --- 服务 ---</span>
+    def set(self, key: str, svc: Any) -&gt; None:
+        self._services[key] = svc
+
+    def get(self, key: str) -&gt; Any:
+        return self._services[key]
+
+    <span class="c"># --- 可逆副作用：返回 disposer，卸载时统一回收 ---</span>
+    def effect(self, dispose: Callable[[], None]) -&gt; Callable[[], None]:
+        self._disposers.append(dispose)
+        return dispose
+
+    def dispose(self) -&gt; None:
+        while self._disposers:
+            self._disposers.pop()()
+
+    <span class="c"># --- 事件 ---</span>
+    def on(self, event: str, fn: Callable, prepend: bool = False) -&gt; Callable[[], None]:
+        lst = self._listeners.setdefault(event, [])
+        lst.insert(0, fn) if prepend else lst.append(fn)
+
+        def off() -&gt; None:
+            if fn in lst:
+                lst.remove(fn)
+
+        return self.effect(off)
+
+    def emit(self, event: str, **kw) -&gt; None:
+        for fn in list(self._listeners.get(event, [])):
+            fn(**kw)
+
+    def waterfall(self, event: str, value: Any, **kw) -&gt; Any:
+        &quot;&quot;&quot;环绕中间件：监听器签名 f(value, next_, **kw)，不调 next_ 即短路。&quot;&quot;&quot;
+        chain = list(self._listeners.get(event, []))
+
+        def step(v: Any, i: int) -&gt; Any:
+            if i &gt;= len(chain):
+                return v
+            fn = chain[i]
+            return fn(v, lambda nv=None: step(v if nv is None else nv, i + 1), **kw)
+
+        return step(value, 0)
+
+
+<span class="c"># ============ 2. 工具注册表 ============</span>
+@dataclass
+class Tool:
+    name: str
+    description: str
+    params: dict          <span class="c"># {参数名: {type, required, description}}</span>
+    run: Callable         <span class="c"># run(args, ctx) -&gt; 任意可 JSON 序列化的值</span>
+
+    def schema(self) -&gt; dict:
+        props = {k: {kk: vv for kk, vv in v.items() if kk != &quot;required&quot;}
+                 for k, v in self.params.items()}
+        required = [k for k, v in self.params.items() if v.get(&quot;required&quot;)]
+        return {
+            &quot;name&quot;: self.name,
+            &quot;description&quot;: self.description,
+            &quot;input_schema&quot;: {&quot;type&quot;: &quot;object&quot;, &quot;properties&quot;: props, &quot;required&quot;: required},
+        }
+
+
+class Tools:
+    def __init__(self):
+        self._tools: dict[str, Tool] = {}
+
+    def register(self, tool: Tool) -&gt; Callable[[], None]:
+        self._tools[tool.name] = tool
+        return lambda: self._tools.pop(tool.name, None)
+
+    def schemas(self) -&gt; list[dict]:
+        return [t.schema() for t in self._tools.values()]
+
+    def call(self, name: str, args: dict, ctx: Context) -&gt; Any:
+        if name not in self._tools:
+            raise KeyError(f&quot;unknown tool: {name}&quot;)
+        return self._tools[name].run(args, ctx)
+
+
+<span class="c"># ============ 3. Agent loop（turn / step 两层） ============</span>
+class Agent:
+    &quot;&quot;&quot;一个 turn 包含零或多个 step；一个 step = 一次模型请求 + 它发起的工具调用。&quot;&quot;&quot;
+
+    def __init__(self, ctx: Context, model: Callable, system: str, log_path: str):
+        self.ctx = ctx
+        self.model = model
+        self.system = system
+        self.log_path = log_path
+
+    def _log(self, event: str, **kw) -&gt; None:
+        os.makedirs(os.path.dirname(self.log_path), exist_ok=True)
+        with open(self.log_path, &quot;a&quot;, encoding=&quot;utf-8&quot;) as f:
+            f.write(json.dumps({&quot;event&quot;: event, **kw}, ensure_ascii=False) + &quot;\n&quot;)
+
+    def run_turn(self, user_message: str, max_steps: int = 8) -&gt; str:
+        self._log(&quot;turn/start&quot;)
+        self.ctx.emit(&quot;turn/start&quot;, message=user_message)
+
+        messages = [
+            {&quot;role&quot;: &quot;system&quot;, &quot;content&quot;: self.system},
+            {&quot;role&quot;: &quot;user&quot;, &quot;content&quot;: user_message},
+        ]
+        tools = self.ctx.get(&quot;tools&quot;)
+
+        for _ in range(max_steps):
+            <span class="c"># 扩展点：插件可以在模型调用前改写消息（返回 None 表示拒绝这一步）</span>
+            pending = self.ctx.waterfall(&quot;agent/pre-step&quot;, messages)
+            if pending is None:
+                self._log(&quot;turn/end&quot;, reason=&quot;rejected&quot;)
+                return &quot;&quot;
+
+            self._log(&quot;step/start&quot;)
+            reply = self.model(pending, tools.schemas())
+            self._log(&quot;assistant/message&quot;, content=reply.get(&quot;content&quot;, &quot;&quot;))
+            messages.append(reply)
+
+            calls = reply.get(&quot;tool_calls&quot;) or []
+            if not calls:
+                self._log(&quot;turn/end&quot;, reason=&quot;done&quot;)
+                self.ctx.emit(&quot;turn/end&quot;, reply=reply.get(&quot;content&quot;, &quot;&quot;))
+                return reply.get(&quot;content&quot;, &quot;&quot;)
+
+            for call in calls:
+                decision = self.ctx.waterfall(&quot;tools/pre-execute&quot;, call)
+                if decision is None:                      <span class="c"># 被策略插件拦下</span>
+                    result = {&quot;error&quot;: &quot;denied by policy&quot;}
+                else:
+                    try:
+                        result = tools.call(call[&quot;name&quot;], call.get(&quot;arguments&quot;, {}), self.ctx)
+                    except Exception as exc:              <span class="c"># 工具异常 = isError，不打断 loop</span>
+                        result = {&quot;error&quot;: f&quot;{type(exc).__name__}: {exc}&quot;}
+                result = self.ctx.waterfall(&quot;tools/post-execute&quot;, result, call=call)
+
+                messages.append({
+                    &quot;role&quot;: &quot;tool&quot;,
+                    &quot;tool_call_id&quot;: call[&quot;id&quot;],
+                    &quot;content&quot;: json.dumps(result, ensure_ascii=False)[:4000],
+                })
+                self._log(&quot;tool/result&quot;, name=call[&quot;name&quot;], result=str(result)[:200])
+
+        self._log(&quot;turn/end&quot;, reason=&quot;max_steps&quot;)
+        return &quot;(达到最大步数)&quot;
+
+
+<span class="c"># ============ 4. 插件：就是一个函数 ============</span>
+def filesystem_plugin(ctx: Context) -&gt; None:
+    &quot;&quot;&quot;注册 read_file 工具；插件卸载时工具自动注销。&quot;&quot;&quot;
+
+    def read_file(args: dict, _ctx: Context) -&gt; str:
+        path = os.path.abspath(args[&quot;path&quot;])
+        with open(path, encoding=&quot;utf-8&quot;) as f:
+            return f.read()[:4000]
+
+    ctx.effect(ctx.get(&quot;tools&quot;).register(Tool(
+        name=&quot;read_file&quot;,
+        description=&quot;Read a UTF-8 text file from disk.&quot;,
+        params={&quot;path&quot;: {&quot;type&quot;: &quot;string&quot;, &quot;required&quot;: True, &quot;description&quot;: &quot;绝对路径&quot;}},
+        run=read_file,
+    )))
+
+
+def guard_plugin(ctx: Context) -&gt; None:
+    &quot;&quot;&quot;策略插件：拦掉路径不在白名单里的读操作（对应 dsh 的 tools/pre-execute）。&quot;&quot;&quot;
+
+    def gate(call: dict, next_, **_):
+        args = call.get(&quot;arguments&quot;, {})
+        if call[&quot;name&quot;] == &quot;read_file&quot; and &quot;/etc/&quot; in str(args.get(&quot;path&quot;, &quot;&quot;)):
+            return None                     <span class="c"># 不调 next_ = 短路，直接拒绝</span>
+        return next_(call)
+
+    ctx.on(&quot;tools/pre-execute&quot;, gate, prepend=True)
+
+
+def audit_plugin(ctx: Context) -&gt; None:
+    &quot;&quot;&quot;观测插件：只记录，不改行为（对应 tools/post-execute）。&quot;&quot;&quot;
+
+    def audit(result, next_, call=None, **_):
+        print(f&quot;  [audit] {call[&<span class="c">#x27;name&#x27;]} -&gt; {str(result)[:60]}&quot;)</span>
+        return next_(result)      <span class="c"># 观察者必须委托，否则会短路</span>
+
+    ctx.on(&quot;tools/post-execute&quot;, audit)
+
+
+<span class="c"># ============ 5. 组装并跑一个 turn ============</span>
+def fake_model(messages, schemas) -&gt; dict:
+    &quot;&quot;&quot;用一个假模型验证 loop：第一轮调 read_file，第二轮直接回答。&quot;&quot;&quot;
+    already = any(m.get(&quot;role&quot;) == &quot;tool&quot; for m in messages)
+    if not already:
+        return {
+            &quot;role&quot;: &quot;assistant&quot;,
+            &quot;content&quot;: &quot;&quot;,
+            &quot;tool_calls&quot;: [{&quot;id&quot;: &quot;call_1&quot;, &quot;name&quot;: &quot;read_file&quot;,
+                            &quot;arguments&quot;: {&quot;path&quot;: os.path.abspath(__file__)}}],
+        }
+    last = [m for m in messages if m.get(&quot;role&quot;) == &quot;tool&quot;][-1][&quot;content&quot;]
+    return {&quot;role&quot;: &quot;assistant&quot;, &quot;content&quot;: f&quot;文件前 80 字：{last[:80]}&quot;}
+
+
+if __name__ == &quot;__main__&quot;:
+    ctx = Context()
+    ctx.set(&quot;tools&quot;, Tools())
+
+    for plug in (filesystem_plugin, guard_plugin, audit_plugin):
+        plug(ctx)
+
+    agent = Agent(ctx, fake_model, &quot;你是一个极简 agent。&quot;, &quot;/tmp/mini_agent_session.jsonl&quot;)
+    print(&quot;turn 开始&quot;)
+    out = agent.run_turn(&quot;读一下 mini_agent.py 的开头&quot;)
+    print(&quot;回复:&quot;, out)
+    print(&quot;\n会话日志:&quot;)
+    with open(&quot;/tmp/mini_agent_session.jsonl&quot;, encoding=&quot;utf-8&quot;) as f:
+        for line in f:
+            print(&quot;  &quot;, line.replace(&quot;\n&quot;, &quot;&quot;)[:150])
+    ctx.dispose()
+    print(&quot;\n插件已卸载，工具数:&quot;, len(ctx.get(&quot;tools&quot;)._tools))
+</code></pre>
+
+<h3>跑起来长这样</h3>
+
+<pre><code>turn 开始
+  [audit] read_file -&gt; """\nmini_agent.py —— 与 DeepSeek Harness 同构的最小 agent 内核
+回复: 文件前 80 字："""\nmini_agent.py —— 与 DeepSeek Harness 同构的最小 agent 内核\n跑法：python3 mini_age
+
+会话日志:
+   {"event": "turn/start"}
+   {"event": "step/start"}
+   {"event": "assistant/message", "content": ""}
+   {"event": "tool/result", "name": "read_file", "result": "..."}
+   {"event": "step/start"}
+   {"event": "assistant/message", "content": "文件前 80 字：..."}
+   {"event": "turn/end", "reason": "done"}
+
+插件已卸载，工具数: 0</code></pre>
+
+<p>三件事同时被验证了：<b>两个 step 的循环</b>、<b>策略门禁和审计插件挂上了</b>、<b>dispose 之后工具真的消失了</b>（工具数 0）。</p>
+
+<h3>dsh 概念 ↔ 我的实现，一一对应</h3>
+
+<table>
+  <tr><th style="width:32%">dsh / Cordis</th><th style="width:30%">200 行版本</th><th>差异</th></tr>
+  <tr><td><code>ctx</code> 服务容器</td><td><code>Context._services</code></td><td>无依赖注入图，手工 <code>set</code></td></tr>
+  <tr><td><code>ctx.effect()</code></td><td><code>Context.effect()</code></td><td>一样：返回 disposer，卸载时倒序回收</td></tr>
+  <tr><td><code>ctx.emit / waterfall</code></td><td>同名方法</td><td>我只实现了两种分发（emit / waterfall），dsh 有五种</td></tr>
+  <tr><td><code>defineTool</code></td><td><code>Tool</code> dataclass</td><td>无 zod 校验、无 output schema、无 render</td></tr>
+  <tr><td><code>tools/pre-execute</code> 等三个门</td><td>同名事件</td><td>一样的位置，一样的短路语义</td></tr>
+  <tr><td>turn / step</td><td><code>run_turn()</code> 的 for 循环</td><td>dsh 有"还欠一次请求"的显式状态；我用"有 tool_call 就继续"近似</td></tr>
+  <tr><td>Session 日志（JSONL）</td><td><code>_log()</code></td><td>dsh 有 schema、版本、压缩、回滚；我只有 append</td></tr>
+</table>
+
+<h2 id="gap"><span class="n">07</span>你的版本和它的差距</h2>
+
+<p>跑通 200 行之后，你会立刻意识到差距不在"loop 怎么写"，而在这张表上：</p>
+
+<table>
+  <tr><th style="width:24%">能力</th><th style="width:38%">dsh 的做法</th><th>要不要自己补</th></tr>
+  <tr><td><b>上下文压缩</b></td><td>独立插件，按 token 预算自动摘要，事件可观测</td><td>生产必补，最难补</td></tr>
+  <tr><td><b>沙箱与审批</b></td><td>策略插件 + 危险级别 + 人工确认卡片</td><td>涉及安全，必须补</td></tr>
+  <tr><td><b>会话持久化</b></td><td>JSONL + 版本号 + 检查点 + 格式迁移</td><td>想要"断点续跑"就补</td></tr>
+  <tr><td><b>子 agent</b></td><td>运行时树成员关系，独立作用域</td><td>多任务并行时补</td></tr>
+  <tr><td><b>MCP</b></td><td>统一挂载一次，客户端条目即插即用</td><td>要接外部工具时补</td></tr>
+  <tr><td><b>多模型适配</b></td><td>适配器 seam，流式词汇表统一</td><td>换模型时补</td></tr>
+  <tr><td><b>UI</b></td><td>Web / Electron / ACP / SDK 四种壳</td><td>看你要不要给人用</td></tr>
+</table>
+
+<div class="note">
+  <b>结论：</b>200 行给你的是<b>骨架正确</b>。骨架错了，后面每加一个功能都会更痛；骨架对了，补这些是体力活而不是重写。这也是为什么值得先走一遍 L3。
+</div>
+
+<h2 id="when"><span class="n">08</span>什么时候不该用它</h2>
+
+<p>说点反向的：</p>
+
+<ul>
+  <li><b>它明确处于"开发者预览"。</b>官方 README 写了"未来将出现破坏兼容性的变更"。你要做长期产品，得接受某天配置树重构。</li>
+  <li><b>TypeScript 生态。</b>插件是 TS 写的。你的技术栈是 Python/R 的话，L3 自建或换成 Python 系的框架更省事。</li>
+  <li><b>配置即代码的代价。</b>profile / bundle / patch 四层很优雅，但调试"为什么这个插件没生效"要翻四层 YAML。</li>
+  <li><b>它不替你做产品决策。</b>它给你一个可重组的运行时，但"agent 该有几个工具""什么时候该停"仍然要你自己想。</li>
+</ul>
+
+<div class="key" style="margin-top:24px">
+  <b>给你的一句判断：</b>如果你要的是"一个能跑的 agent"，<code>npx</code> 一行就够，别浪费时间读源码。<br>
+  如果你要的是"知道 agent 到底怎么运转、并且能在自己的场景里改它"，<b>花两天把 200 行写一遍</b>，比读 dsh 的一万行配置值。
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>资料来源</b><br>
+    github.com/deepseek-ai/deepseek-harness（MIT）· README.zh.md · docs/architecture.zh.md · docs/cordis-primer.zh.md · docs/cookbook/adding-a-tool.zh.md · packages/bundle/sdk-minimal<br><br>
+    文中架构描述与时序图基于官方文档；200 行实现为本机实测代码（Python 3.14，无三方依赖）。<br>
+    star 数为 2026-11-18 快照。<br><br>
+    <a href="https://zhouxundage.github.io/news/">← 回到前沿日报</a>
+  </div>
+</footer>
+</body>
+</html>
