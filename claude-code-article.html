@@ -1,0 +1,541 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Claude Code 拆解：固定内核 + 可编程外围，以及 150 行复刻</title>
+<style>
+:root{
+  --blue:#1f6feb; --blue2:#e8f1fe; --green:#0f7b52; --green2:#e6f5ef;
+  --orange:#f08c00; --orange2:#fff4e5; --red:#d9363e; --red2:#fdecec;
+  --ink:#1f2937; --mute:#6b7280; --faint:#9ca3af;
+  --line:#e5e7eb; --bg:#f8fafc; --code:#0f172a;
+  --mono:ui-monospace,SFMono-Regular,Consolas,"Microsoft YaHei",monospace;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);
+  font:16.5px/1.8 system-ui,-apple-system,"Segoe UI","Microsoft YaHei",sans-serif}
+a{color:var(--blue)}
+header{background:#fff;border-bottom:1px solid var(--line);padding:34px max(20px,5vw) 26px}
+.wrap{max-width:820px;margin:auto}
+.eyebrow{font-size:12px;letter-spacing:.1em;text-transform:uppercase;color:var(--blue);font-weight:700}
+h1{font-size:31px;line-height:1.35;margin:8px 0 10px;font-weight:750;letter-spacing:-.015em}
+.sub{color:var(--mute);font-size:15px;line-height:1.75}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(120px,1fr));gap:10px;margin-top:18px}
+.stats div{background:#f8fafc;border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.stats b{display:block;font:700 20px var(--mono);color:var(--blue)}
+.stats span{font-size:11.5px;color:var(--faint)}
+main{max-width:820px;margin:auto;padding:30px 20px 60px}
+h2{font-size:23px;margin:44px 0 10px;font-weight:750;letter-spacing:-.01em;
+  padding-bottom:8px;border-bottom:2px solid var(--line)}
+h2 .n{color:var(--faint);font:600 15px var(--mono);margin-right:8px}
+h3{font-size:17.5px;margin:26px 0 6px;font-weight:700}
+p{margin:12px 0}
+ul,ol{margin:12px 0;padding-left:24px}
+li{margin:6px 0}
+code{font-family:var(--mono);font-size:14px;background:#eef2f7;border-radius:4px;padding:1px 5px}
+pre{background:var(--code);color:#e2e8f0;border-radius:10px;padding:15px 17px;overflow-x:auto;
+  font:12.8px/1.6 var(--mono);margin:16px 0;border-left:4px solid var(--blue)}
+pre code{background:none;padding:0;color:inherit;font-size:inherit}
+pre .c{color:#64748b}
+.tldr{background:var(--blue2);border-left:5px solid var(--blue);border-radius:10px;padding:16px 20px;margin:22px 0}
+.tldr b{color:#134a9e}
+.key{border-left:5px solid var(--green);background:var(--green2);padding:14px 18px;border-radius:10px;margin:16px 0}
+.warn{border-left:5px solid var(--red);background:var(--red2);padding:14px 18px;border-radius:10px;margin:16px 0}
+.note{border-left:5px solid var(--orange);background:var(--orange2);padding:14px 18px;border-radius:10px;margin:16px 0}
+table{border-collapse:collapse;width:100%;font-size:14.5px;margin:16px 0}
+th,td{border-bottom:1px solid var(--line);padding:9px 10px;text-align:left;vertical-align:top}
+th{background:#f3f6fa;font-weight:650}
+td code{font-size:13px}
+.toc{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 20px;margin:22px 0}
+.toc ol{margin:0;padding-left:22px;font-size:14.5px}
+.toc li{margin:4px 0}
+.toc a{text-decoration:none}
+.gr{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin:16px 0}
+@media(max-width:680px){.gr{grid-template-columns:1fr}h1{font-size:24px}h2{font-size:20px}}
+.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px}
+.card h4{margin:0 0 6px;font-size:15px}
+.card p{margin:6px 0 0;font-size:14px;color:#4b5563}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:stretch;margin:16px 0}
+.step{flex:1 1 120px;background:#fff;border:1.5px solid var(--blue);border-radius:10px;padding:9px 12px;font-size:13.5px}
+.step b{display:block;color:var(--blue);font-size:14px;margin-bottom:2px}
+.arr{align-self:center;color:var(--faint);font-size:18px}
+footer{max-width:820px;margin:auto;padding:20px 20px 60px;border-top:1px solid var(--line);color:var(--faint);font-size:13px}
+.tag{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--blue2);color:var(--blue);font-weight:650;vertical-align:2px}
+</style>
+</head>
+<body>
+
+<header><div class="wrap">
+  <div class="eyebrow">Deep Dive · 2026-11-18 · 第二篇</div>
+  <h1>Claude Code 拆解：<br>固定内核 + 可编程外围，以及 150 行复刻</h1>
+  <div class="sub">它和 DeepSeek Harness 是两种相反的设计哲学：一个把内核也做成插件，一个把内核焊死、把外围做到极致。<br>这篇讲清后者凭什么更强，以及你怎么用一个 API 把它抄回来。</div>
+  <div class="stats">
+    <div><b>闭源</b><span>产品本体</span></div>
+    <div><b>Agent SDK</b><span>同名 loop 可调用</span></div>
+    <div><b>8</b><span>内置工具</span></div>
+    <div><b>6 种</b><span>权限模式</span></div>
+    <div><b>150 行</b><span>可复刻的 loop</span></div>
+  </div>
+</div></header>
+
+<main>
+
+<div class="tldr">
+  <b>如果只读一段：</b>Claude Code 官方文档里管自己叫 <b>agentic harness</b>——把模型包起来的那个壳。它的壳只有一层固定结构（loop），但在这层壳上开了五圈挂载点：<b>hooks（生命周期）、skills（知识）、subagents（上下文隔离）、MCP（外部工具）、permissions（安全）</b>。你复刻不了它的内核，但你能用 Anthropic Messages API 在一个下午复刻出同构的 loop——剩下的差距全在工程。
+</div>
+
+<div class="toc">
+  <b style="font-size:14px">目录</b>
+  <ol>
+    <li><a href="#what">它是什么：四个层次，别混为一谈</a></li>
+    <li><a href="#five">五个设计决策</a></li>
+    <li><a href="#loop">loop 的真实流程与权限求值链</a></li>
+    <li><a href="#tool">工具怎么写：和 dsh 的对比</a></li>
+    <li><a href="#path">三层复刻路径</a></li>
+    <li><a href="#mini">150 行复刻（可跑，mock 已验证）</a></li>
+    <li><a href="#gap">你和它之间的真实差距</a></li>
+    <li><a href="#when">什么时候不该用它</a></li>
+  </ol>
+</div>
+
+<h2 id="what"><span class="n">01</span>它是什么：四个层次</h2>
+
+<p>"Claude Code 是什么"这个问题之所以经常答错，是因为它同时是四样东西。官方自己列了张对照表：</p>
+
+<table>
+  <tr><th style="width:22%">层次</th><th style="width:30%">是什么</th><th>什么时候用</th></tr>
+  <tr>
+    <td><b>CLI 产品</b></td>
+    <td>终端里的交互式 agent：<code>claude</code></td>
+    <td>人机协作编码、一次性任务</td>
+  </tr>
+  <tr>
+    <td><b>Agent SDK</b></td>
+    <td>Python / TypeScript 库，<b>打包了同一套 loop、工具和上下文管理</b></td>
+    <td>你要在程序里跑 agent，但不想自己写工具循环</td>
+  </tr>
+  <tr>
+    <td><b>Client SDK</b></td>
+    <td>Anthropic Messages API 的客户端</td>
+    <td>你要完全自己实现 loop</td>
+  </tr>
+  <tr>
+    <td><b>Managed Agents</b></td>
+    <td>托管 REST API，Anthropic 替你跑沙箱和会话</td>
+    <td>长任务、异步、不想管基础设施</td>
+  </tr>
+</table>
+
+<div class="key">
+  <b>关键事实：</b>Agent SDK 里跑的是<b>同一个 loop</b>，而且是<b>打包了一个原生 Claude Code 二进制</b>在里面的。所以"用 SDK"和"用 CLI"在内核上是一回事，区别只在控制面。
+</div>
+
+<p>这也解释了它为什么闭源但可以学：<b>产品闭源，但 loop 的每一步都在 SDK 的消息流里吐出来</b>。你观察不到源码，但你能观察到每一个决策点。</p>
+
+<h3>和 DeepSeek Harness 的根本差异</h3>
+
+<table>
+  <tr><th style="width:22%">维度</th><th style="width:39%">DeepSeek Harness</th><th>Claude Code</th></tr>
+  <tr><td><b>内核（loop）</b></td><td>插件，可替换</td><td><b>固定</b>，不可换</td></tr>
+  <tr><td><b>扩展方式</b></td><td>挂载同构插件，改配置树</td><td>在<b>外围挂载点</b>上挂钩子</td></tr>
+  <tr><td><b>开源</b></td><td>MIT，源码全可见</td><td>闭源，只有 SDK 和文档</td></tr>
+  <tr><td><b>可观测性</b></td><td>读日志 + 读源码</td><td>SDK 消息流（5 种消息）</td></tr>
+  <tr><td><b>适合谁</b></td><td>要重组 agent 架构的人</td><td>要一个<b>已经调好的</b> coding agent 的人</td></tr>
+</table>
+
+<p>一句话：<b>dsh 赌"你会想改内核"，Claude Code 赌"你不想改内核，但想改一切其它东西"</b>。后者在工程上更保守，也更容易做出稳定产品。</p>
+
+<h2 id="five"><span class="n">02</span>五个设计决策</h2>
+
+<h3>① 工具集刻意做小，把通用能力交给 bash</h3>
+<p>内置工具只有六个核心：<code>Read</code>、<code>Write</code>、<code>Edit</code>、<code>Glob</code>、<code>Grep</code>、<code>Bash</code>，加两个 Web 工具。</p>
+<p>注意它<b>没有</b>：rename 工具、mkdir 工具、git 工具、包管理工具、测试工具。这些全部通过 <code>Bash</code> 完成。</p>
+<div class="key">
+  这是一个非常克制的选择：<b>工具越少，模型选错的概率越低；bash 是唯一的"万能后门"</b>。代价是每次 shell 调用都是一次权限决策点——所以它的权限系统必须做得足够细。
+</div>
+
+<h3>② 上下文是核心资产，不是副产品</h3>
+<p>Claude Code 花在"管理上下文"上的设计，比花在"调用模型"上的多得多：</p>
+
+<table>
+  <tr><th style="width:26%">机制</th><th>作用</th></tr>
+  <tr><td><b>CLAUDE.md 层级</b></td><td>企业级 → 项目级 → 用户级，自动加载；另有 <code>.claude/rules/*.md</code> 可懒加载</td></tr>
+  <tr><td><b>自动压缩</b></td><td>接近窗口上限时摘要历史，保留任务状态</td></tr>
+  <tr><td><b>Subagent 隔离</b></td><td>子任务在<b>独立上下文</b>里跑，只把结论带回主线</td></tr>
+  <tr><td><b>Skills 渐进披露</b></td><td>技能描述先入上下文，正文按需加载——不占常驻预算</td></tr>
+  <tr><td><b>InstructionsLoaded 事件</b></td><td>连"哪个文件被加载进上下文"都做成了可观测事件</td></tr>
+</table>
+
+<p>最后一条很说明问题：<b>它把上下文加载本身当成了需要审计的事</b>。</p>
+
+<h3>③ 权限不是布尔开关，是一条求值链</h3>
+<p>这是 Claude Code 最被低估的设计。一次工具调用的放行要过五关：</p>
+
+<pre><code>工具调用请求
+   ↓
+① hooks（PreToolUse）         ← 自定义脚本，可 allow / deny / 修改入参
+   ↓
+② deny 规则（disallowed_tools / settings）  ← 命中即拒，bypassPermissions 也拦不住
+   ↓
+③ ask 规则（settings.json）    ← 命中就一定要问人
+   ↓
+④ permission mode             ← default / acceptEdits / plan / dontAsk / auto / bypassPermissions
+   ↓
+⑤ canUseTool 回调             ← 程序里的最后一道人工确认
+   ↓
+执行</code></pre>
+
+<div class="warn">
+  <b>顺序不能反。</b>deny 规则在 hook 之后、ask 之前——意味着<b>即使你的 hook 返回 allow，deny 规则仍然能否决</b>。这是"策略不能被绕过"的体现：越靠后的关卡优先级越高。反过来，<code>onFailure: "block"</code> 才让超时的 hook 真正起到门禁作用，否则 hook 崩了就等于全放行。
+</div>
+
+<h3>④ 扩展点全在外围，一圈一圈套</h3>
+<table>
+  <tr><th style="width:18%">挂载点</th><th style="width:34%">管什么</th><th>典型用法</th></tr>
+  <tr><td><b>hooks</b></td><td>生命周期事件：会话开始、提交提示、工具前后、结束</td><td>自动格式化、审计日志、拦危险命令</td></tr>
+  <tr><td><b>skills</b></td><td>领域知识与流程，按需加载</td><td>把你的团队规范固化成可复用技能</td></tr>
+  <tr><td><b>subagents</b></td><td>独立上下文的子任务执行者</td><td>让"搜索 20 个文件"不污染主线</td></tr>
+  <tr><td><b>MCP</b></td><td>外部工具/数据源协议</td><td>接数据库、Jira、内部 API</td></tr>
+  <tr><td><b>plugins</b></td><td>把上面几样打包分发</td><td>团队级能力共享</td></tr>
+</table>
+
+<h3>⑤ 内核固定，但每一步都可观测</h3>
+<p>Agent SDK 会吐五类消息，覆盖 loop 的完整生命周期：</p>
+
+<table>
+  <tr><th style="width:26%">消息类型</th><th>含义</th></tr>
+  <tr><td><code>SystemMessage</code></td><td>会话初始化（subtype=<code>init</code>），带 session 元数据</td></tr>
+  <tr><td><code>AssistantMessage</code></td><td><b>每个内容块一条</b>：文本块、工具调用块各一条</td></tr>
+  <tr><td><code>UserMessage</code></td><td>工具执行结果回传给模型（也用于中途插入的用户输入）</td></tr>
+  <tr><td><code>StreamEvent</code></td><td>开启部分消息时的原始流事件（文本增量、工具入参增量）</td></tr>
+  <tr><td><code>ResultMessage</code></td><td>loop 结束：最终文本、token 用量、成本、session id、<code>subtype</code> 表示成功还是撞上限</td></tr>
+</table>
+
+<div class="note">
+  <b>实战提醒：</b>官方文档专门写了一句"<code>ResultMessage</code> 之后还可能来少量尾部系统事件，要迭代到流结束，不要看到 result 就 break"。这是一个真实的坑——很多人在这里丢消息。
+</div>
+
+<h2 id="loop"><span class="n">03</span>loop 的真实流程</h2>
+
+<p>官方把自己的 loop 描述成"三阶段混合"，但在 SDK 层面是五步：</p>
+
+<div class="flow">
+  <div class="step"><b>① 收提示</b>prompt + system + 工具定义 + 历史</div>
+  <div class="arr">→</div>
+  <div class="step"><b>② 评估</b>可能回文本、可能要工具、可能都要</div>
+  <div class="arr">→</div>
+  <div class="step"><b>③ 执行工具</b>hooks 可拦截/修改/阻断</div>
+  <div class="arr">→</div>
+  <div class="step"><b>④ 循环</b>结果回灌，回到②</div>
+  <div class="arr">→</div>
+  <div class="step"><b>⑤ 结束</b>无工具调用的那条回复即终止</div>
+</div>
+
+<p>而"三阶段"是给人类看的认知模型：</p>
+
+<pre><code>gather context（读代码、搜文件）
+      ↕  反复混合
+take action（编辑、跑命令）
+      ↕
+verify results（跑测试、看错误）</code></pre>
+
+<p>三个阶段的边界是模糊的——一个 bug fix 可能循环"读→改→测"十几次。真正控制它停下来的，是<b>模型自己判断"这次不需要再调工具了"</b>，而不是外部的计数器。</p>
+
+<div class="key">
+  <b>turn 的定义：</b>一次 pass 过 loop（模型输出 + 它引发的工具执行 + 结果回灌）。<b>turn 结束的条件是"模型输出了不带工具调用的回复"</b>。所以"轮数"是结果，不是参数——你能设的是 <code>max_turns</code> 上限，不是"跑三轮就停"。
+</div>
+
+<h2 id="tool"><span class="n">04</span>工具怎么写</h2>
+
+<p>Claude Code 内置工具你是改不了的，但 Agent SDK 允许两种扩展：</p>
+
+<ol>
+  <li><b>进程内 MCP server</b> —— 用 SDK 的 <code>tool()</code> 辅助函数定义，跑在你自己的进程里，不需要起服务</li>
+  <li><b>自定义 tool</b>（TS SDK）—— 直接给工具定义加 <code>permission_policy</code> 等字段</li>
+</ol>
+
+<p>形态与 dsh 的 <code>defineTool</code> 很像，因为两者都遵循同一个事实标准：<b>JSON Schema 描述入参 + 一个 async 执行函数</b>。</p>
+
+<pre><code><span class="c"># Python SDK：进程内工具</span>
+<span class="k">from</span> claude_agent_sdk <span class="k">import</span> tool, create_sdk_mcp_server
+
+<span class="k">@tool</span>(<span class="s">"read_file"</span>, <span class="s">"Read a file"</span>, {<span class="s">"path"</span>: str})
+<span class="k">async def</span> read_file(args):
+    <span class="k">return</span> {<span class="s">"content"</span>: [{<span class="s">"type"</span>: <span class="s">"text"</span>, <span class="s">"text"</span>: open(args[<span class="s">"path"</span>]).read()}]}
+
+server = create_sdk_mcp_server(name=<span class="s">"my-tools"</span>, tools=[read_file])</code></pre>
+
+<h3>三个和 dsh 不同的地方</h3>
+
+<table>
+  <tr><th style="width:26%">对比项</th><th>dsh</th><th>Claude Code</th></tr>
+  <tr><td>参数校验</td><td>框架按 schema 自动校验，execute 拿到已校验的 args</td><td>框架校验后传入，但你仍要处理业务约束</td></tr>
+  <tr><td>权限</td><td>挂在 <code>tools/pre-execute</code> 事件上</td><td>挂在 <b>hooks + 规则 + mode</b> 三层上，且有固定优先级</td></tr>
+  <tr><td>输出</td><td>返回规范 JSON 值，<code>output.render</code> 负责展示</td><td>返回 MCP 的 content 块（文本/图片/资源）</td></tr>
+</table>
+
+<div class="warn">
+  <b>关于"工具里写策略"：</b>两个框架的态度一致——不要在工具内部判断"该不该执行"，把它交给外层的策略层。区别是 dsh 用事件，Claude Code 用权限链。后者更难绕过，但更难调试。
+</div>
+
+<h2 id="path"><span class="n">05</span>三层复刻路径</h2>
+
+<h3>L1：直接用（0 分钟，但要订阅或 API key）</h3>
+<pre><code>npm install -g @anthropic-ai/claude-code
+claude                      <span class="c"># 交互式</span>
+claude -p "修一下 auth 的测试" --output-format json   <span class="c"># 无头模式</span></code></pre>
+<p>无头模式是自动化最常用的入口：<code>-p</code> 加 <code>--output-format json</code>，就能把它当命令行工具嵌进脚本。</p>
+
+<h3>L2：Agent SDK（20 行，拿到同款 loop）</h3>
+<pre><code><span class="k">import</span> asyncio
+<span class="k">from</span> claude_agent_sdk <span class="k">import</span> query, AssistantMessage, ResultMessage, TextBlock
+
+<span class="k">async def</span> main():
+    <span class="k">async for</span> message <span class="k">in</span> query(prompt=<span class="s">"Summarize this project"</span>):
+        <span class="k">if</span> isinstance(message, AssistantMessage):
+            <span class="k">for</span> block <span class="k">in</span> message.content:
+                <span class="k">if</span> isinstance(block, TextBlock):
+                    print(f<span class="s">"Claude: {block.text}"</span>)
+        <span class="k">if</span> isinstance(message, ResultMessage) <span class="k">and</span> message.subtype == <span class="s">"success"</span>:
+            print(message.result)
+
+asyncio.run(main())</code></pre>
+<p>这一步你能拿到：内置工具、权限控制、hooks、subagent、MCP、成本统计。<b>代价是它把 loop 封装了——你能观测，但改不了。</b></p>
+
+<h3>L3：自己写 loop（150 行，完全掌控）</h3>
+<p>用 Anthropic Messages API，把 tool_use / tool_result 的循环手写一遍。下面这份代码我实际跑过（mock 模式验证循环结构，把 <code>ANTHROPIC_API_KEY</code> 设上就是真实调用）。</p>
+
+<h2 id="mini"><span class="n">06</span>150 行复刻</h2>
+
+<pre><code>"""
+mini_claude.py —— 用 Anthropic Messages API 复刻 Claude Code 的 agent loop
+无第三方依赖，只用标准库。
+
+有 key：ANTHROPIC_API_KEY=sk-ant-... python3 mini_claude.py "读一下 README"
+无 key：自动进入 mock 模式，用假响应验证循环结构
+"""
+import json
+import os
+import urllib.error
+import urllib.request
+
+API = "https://api.anthropic.com/v1/messages"
+MODEL = os.environ.get("CLAUDE_MODEL", "claude-sonnet-4-5")
+KEY = os.environ.get("ANTHROPIC_API_KEY", "").strip()
+
+SYSTEM = """你是一个命令行 coding agent。你可以读写文件、跑命令。
+先理解再动手；改完代码要自己验证。回答简洁。"""
+
+<span class="c"># ---------- 1. 工具定义：就是 Claude Code 内置的那几个 ----------</span>
+TOOLS = [
+    {
+        "name": "read_file",
+        "description": "Read a UTF-8 text file. Use it before editing anything.",
+        "input_schema": {
+            "type": "object",
+            "properties": {
+                "path": {"type": "string", "description": "绝对路径"},
+                "limit": {"type": "integer", "description": "最多读多少行"},
+            },
+            "required": ["path"],
+        },
+    },
+    {
+        "name": "bash",
+        "description": "Run a shell command in the workspace. Returns stdout+stderr.",
+        "input_schema": {
+            "type": "object",
+            "properties": {"command": {"type": "string"}},
+            "required": ["command"],
+        },
+    },
+]
+
+
+<span class="c"># ---------- 2. 工具执行：一个字典派发 ----------</span>
+def run_tool(name: str, args: dict) -&gt; str:
+    if name == "read_file":
+        path = os.path.abspath(args["path"])
+        if "/etc/" in path or path.startswith("/root"):
+            raise PermissionError(f"path not allowed: {path}")
+        with open(path, encoding="utf-8", errors="replace") as f:
+            lines = f.readlines()
+        limit = args.get("limit") or 200
+        return "".join(lines[:limit])[:8000]
+
+    if name == "bash":
+        import subprocess
+        p = subprocess.run(args["command"], shell=True, capture_output=True,
+                           text=True, timeout=30, cwd=os.getcwd())
+        return (p.stdout + p.stderr)[:8000] or f"(exit {p.returncode}, no output)"
+
+    raise KeyError(f"unknown tool: {name}")
+
+
+<span class="c"># ---------- 3. 一次模型调用 ----------</span>
+def call_model(messages: list) -&gt; dict:
+    if not KEY:
+        return _mock(messages)
+
+    body = json.dumps({
+        "model": MODEL,
+        "max_tokens": 2000,
+        "system": SYSTEM,
+        "tools": TOOLS,
+        "messages": messages,
+    }).encode()
+
+    req = urllib.request.Request(API, data=body, method="POST", headers={
+        "content-type": "application/json",
+        "x-api-key": KEY,
+        "anthropic-version": "2023-06-01",
+    })
+    with urllib.request.urlopen(req, timeout=120) as r:
+        return json.loads(r.read())
+
+
+<span class="c"># ---------- 4. agent loop：整个 Claude Code 的心脏 ----------</span>
+def run_agent(prompt: str, max_turns: int = 10, verbose: bool = True) -&gt; str:
+    messages = [{"role": "user", "content": prompt}]
+
+    for turn in range(1, max_turns + 1):
+        resp = call_model(messages)
+        blocks = resp.get("content", [])
+        stop = resp.get("stop_reason")
+
+        if verbose:
+            for b in blocks:
+                if b["type"] == "text" and b["text"].strip():
+                    print(f"[turn {turn}] 模型: {b['text'].strip()[:160]}")
+                elif b["type"] == "tool_use":
+                    print(f"[turn {turn}] 调用: {b['name']}({json.dumps(b['input'], ensure_ascii=False)})")
+
+        <span class="c"># 关键：把模型的整条回复原样放回历史（含 tool_use 块），否则下一轮会 400</span>
+        messages.append({"role": "assistant", "content": blocks})
+
+        if stop != "tool_use":
+            return "".join(b["text"] for b in blocks if b["type"] == "text")
+
+        <span class="c"># 执行所有工具，结果必须一条消息批量回传</span>
+        results = []
+        for b in blocks:
+            if b["type"] != "tool_use":
+                continue
+            try:
+                out = run_tool(b["name"], b["input"])
+                is_err = False
+            except Exception as exc:                      <span class="c"># 工具失败也要回给模型</span>
+                out, is_err = f"{type(exc).__name__}: {exc}", True
+            results.append({
+                "type": "tool_result",
+                "tool_use_id": b["id"],
+                "content": out,
+                "is_error": is_err,
+            })
+            if verbose:
+                print(f"          → {out[:100].replace(chr(10), ' ')}")
+
+        messages.append({"role": "user", "content": results})
+
+    return "(达到最大轮数，已中止)"
+
+
+<span class="c"># ---------- 5. 无 key 时的假模型：只验证循环结构 ----------</span>
+def _mock(messages: list) -&gt; dict:
+    has_tool = any(
+        isinstance(m.get("content"), list) and any(
+            isinstance(b, dict) and b.get("type") == "tool_result" for b in m["content"])
+        for m in messages
+    )
+    if not has_tool:
+        return {
+            "content": [
+                {"type": "text", "text": "先看一下 mini_claude.py 的开头。"},
+                {"type": "tool_use", "id": "toolu_01", "name": "read_file",
+                 "input": {"path": os.path.abspath(__file__), "limit": 6}},
+            ],
+            "stop_reason": "tool_use",
+        }
+    last = [b for m in messages if isinstance(m.get("content"), list)
+            for b in m["content"] if isinstance(b, dict) and b.get("type") == "tool_result"][-1]
+    return {
+        "content": [{"type": "text", "text": f"读到了，前几行是：\n{last['content'][:120]}"}],
+        "stop_reason": "end_turn",
+    }
+
+
+if __name__ == "__main__":
+    import sys
+    task = sys.argv[1] if len(sys.argv) &gt; 1 else "读一下 mini_claude.py 的开头，告诉我它是什么"
+    print(f"模式: {'真实 API' if KEY else 'mock（无 ANTHROPIC_API_KEY）'}\n")
+    print("最终回答:\n" + run_agent(task))
+</code></pre>
+
+<h3>运行输出（mock 模式）</h3>
+<pre><code>模式: mock（无 ANTHROPIC_API_KEY）
+
+[turn 1] 模型: 先看一下 mini_claude.py 的开头。
+[turn 1] 调用: read_file({"path": ".../mini_claude.py", "limit": 6})
+          → """ mini_claude.py —— 用 Anthropic Messages API 复刻 Claude Code 的 agent loop ...
+[turn 2] 模型: 读到了，前几行是：...
+最终回答:
+读到了，前几行是：...</code></pre>
+
+<h3>这 150 行里有三个必须做对的地方</h3>
+
+<table>
+  <tr><th style="width:30%">要点</th><th>做错的后果</th></tr>
+  <tr><td><b>assistant 消息要原样回灌</b>（含 tool_use 块）</td><td>下一轮 API 直接 400：<code>tool_use ids were found without tool_result blocks</code></td></tr>
+  <tr><td><b>所有 tool_result 必须打包进<b>同一条</b> user 消息</b></td><td>并行工具调用时会被判为不完整，同样 400</td></tr>
+  <tr><td><b>工具抛错也要回传</b>，用 <code>is_error: true</code></td><td>模型永远等不到结果，loop 卡死或超时</td></tr>
+</table>
+
+<div class="key">
+  <b>这就是"复刻"和"照抄"的区别：</b>loop 的骨架只有 30 行，剩下 120 行全在处理协议细节和错误路径。<b>dsh 那篇的 200 行里，一半也是这个。</b>
+</div>
+
+<h2 id="gap"><span class="n">07</span>你和它之间的真实差距</h2>
+
+<p>跑通之后你会发现，差距不在 loop，而在这张表上：</p>
+
+<table>
+  <tr><th style="width:24%">能力</th><th style="width:36%">Claude Code 的做法</th><th>自己补的成本</th></tr>
+  <tr><td><b>上下文压缩</b></td><td>接近上限自动摘要，保留任务状态</td><td>高（要设计"什么必须留"）</td></tr>
+  <tr><td><b>权限系统</b></td><td>五关求值链 + 六种模式 + 规则文件</td><td>中（逻辑不复杂，但边界多想不清）</td></tr>
+  <tr><td><b>编辑工具</b></td><td>Edit 用字符串替换 + 失败重试，不是整文件覆盖</td><td>中（diff 匹配的坑很多）</td></tr>
+  <tr><td><b>并发工具</b></td><td>同一轮多个 tool_use 并行执行</td><td>低（asyncio 就够）</td></tr>
+  <tr><td><b>Subagent</b></td><td>独立上下文 + 独立工具权限 + 结果汇总</td><td>中</td></tr>
+  <tr><td><b>成本控制</b></td><td>token 用量、美元成本、<code>max_turns</code>、预算上限</td><td>低</td></tr>
+  <tr><td><b>会话恢复</b></td><td>session id + 存档 + 续跑</td><td>中</td></tr>
+</table>
+
+<h2 id="when"><span class="n">08</span>什么时候不该用它</h2>
+
+<ul>
+  <li><b>你要改 loop 本身。</b>比如"先规划三步再执行"、"两阶段验证"，Claude Code 的 loop 是固定的，你只能在外围拐弯。这种情况 dsh 更合适。</li>
+  <li><b>你需要完全离线或私有部署。</b>它是云服务 + 闭源二进制，没有自托管路径。</li>
+  <li><b>你的场景不是 coding。</b>工具集（Read/Edit/Bash/Glob/Grep）和 prompt 都是为代码库调的；拿去做客服或数据分析，要重写的东西不少。</li>
+  <li><b>你付不起按 token 计费。</b>长会话 + 大代码库，成本增长比想象快，务必设 <code>max_turns</code> 和预算上限。</li>
+</ul>
+
+<div class="key" style="margin-top:24px">
+  <b>两篇的结论合起来看：</b><br>
+  要<b>改架构</b> → DeepSeek Harness（内核可换）。<br>
+  要<b>尽快做出稳定的 coding agent</b> → Claude Code + Agent SDK。<br>
+  要<b>真正理解 agent 怎么转</b> → 两篇的 200 行 / 150 行都亲手写一遍。这一步没有替代品。
+</div>
+
+</main>
+
+<footer>
+  <div class="wrap">
+    <b>资料来源</b><br>
+    code.claude.com/docs/en/how-claude-code-works · docs.claude.com/docs/en/agent-sdk/agent-loop · /agent-sdk/permissions · /docs/claude-code/hooks · /api/agent-sdk/overview<br><br>
+    loop 与权限链描述基于官方文档；150 行实现为本机实测代码（Python 3.14，标准库，mock 模式验证循环结构）。<br>
+    内置工具数量、权限模式以官方文档当前版本为准——这些会随版本变化。<br><br>
+    <a href="harness-article.html">← 上一篇：DeepSeek Harness 拆解</a>　·　<a href="https://zhouxundage.github.io/news/">回到前沿日报</a>
+  </div>
+</footer>
+</body>
+</html>
